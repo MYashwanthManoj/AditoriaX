@@ -30,12 +30,16 @@ const timestamp  = format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' });
 const errorStack = format.errors({ stack: true });
 const splat      = format.splat();
 
-// ── Development format: colorized, readable ───────────────────────────────────
+// ── Development format: colorized only in real TTY terminals ─────────────────
+// VS Code Output panel is NOT a TTY — raw ANSI codes appear as garbled text.
+// PowerShell / CMD / bash terminals ARE TTYs — they render colors correctly.
+const isTTY = process.stdout.isTTY === true;
+
 const devFormat = format.combine(
   timestamp,
   errorStack,
   splat,
-  format.colorize({ all: true }),
+  ...(isTTY ? [format.colorize({ all: true })] : []),
   format.printf(({ timestamp, level, message, stack, ...meta }) => {
     const metaStr = Object.keys(meta).length
       ? '  ' + JSON.stringify(meta)

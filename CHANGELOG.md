@@ -5,6 +5,25 @@
 
 ---
 
+## Session 8 — FUTURE-06 Audit + FUTURE-07: Structured Logging Completion
+
+**Date:** June 2026 | **Status:** ✅ Complete
+
+### FUTURE-06: Email Verification — Confirmed Already Complete
+- Implemented as FIX-19 in Session 4. Fully operational:
+  - `GET /api/auth/verify-email?token=xxx` — validates token, marks `emailVerified: true`, redirects to app
+  - `POST /api/auth/resend-verification` — regenerates and resends token
+  - On signup: 64-char hex token (24h expiry) generated and emailed non-blockingly
+  - Master admin emails auto-verified on creation
+
+### FUTURE-07: Structured Logging — Final Straggler Fixed
+- `utils/logger.js` and `winston` were already in place across all routes and utilities
+- **Fix:** `middleware/tenant.js` had one remaining `console.error('Tenant resolution error:', err)` — replaced with `logger.error('Tenant resolution error', { error: err.message, stack: err.stack })`
+- Winston logger import added to `middleware/tenant.js`
+- **Result:** Zero `console.log/warn/error` calls remain anywhere in production backend code
+
+---
+
 ## Session 1 — 2026-05-18 — Security & Architecture Hardening
 
 ### ✅ FIX-01 · `.env`, `routes/auth.js` — Hardcoded personal emails removed
@@ -157,7 +176,8 @@
 | FUTURE-01 | 🔴 | Multi-tenant architecture (institution self-onboarding) | ✅ Done (Session 5) |
 | FUTURE-02 | 🔴 | Platform fee / billing model (Razorpay split) | ✅ Done (Session 6) |
 | FUTURE-04 | 🟠 | Waitlist system (notify on cancellation) | ✅ Done (Session 7) |
-| FUTURE-07 | 🟡 | Structured logging (replace console.log with pino/winston) | Pending |
+| FUTURE-06 | 🟠 | Email verification on signup | ✅ Done (Session 4) |
+| FUTURE-07 | 🟡 | Structured logging (replace console.log with winston) | ✅ Done (Session 8) |
 | FUTURE-08 | 🟡 | Frontend code split (split monolithic app.js) | Pending |
 | FUTURE-10 | 🟡 | Public landing page + deployment (Render/Railway) | Pending |
 | FUTURE-11 | 🟢 | Analytics dashboard with real charts (Chart.js) | ✅ Done (Session 7) |

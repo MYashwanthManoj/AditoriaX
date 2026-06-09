@@ -1,5 +1,6 @@
 const Institution = require('../models/Institution');
 const User = require('../models/User');
+const logger = require('../utils/logger');
 
 /**
  * resolveTenant — reads the authenticated user's institutionId and attaches
@@ -41,7 +42,7 @@ async function resolveTenant(req, res, next) {
     req.institutionId = institution._id;
     return next();
   } catch (err) {
-    console.error('Tenant resolution error:', err);
+    logger.error('Tenant resolution error', { error: err.message, stack: err.stack });
     return res.status(500).json({ error: 'Server error' });
   }
 }
