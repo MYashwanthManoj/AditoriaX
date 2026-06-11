@@ -684,30 +684,32 @@
       <div class="ticket-logo">⬡ AuditoriaX</div>
       <button class="modal-close" onclick="closeTicketModal()">✕</button>
     </div>
-    <div class="ticket-body">
-      <div class="ticket-success-icon">✓</div>
-      <h3>Booking Confirmed!</h3>
-      <p id="ticketSubtitle"></p>
-    </div>
-    <div class="ticket-details">
-      <div class="ticket-row"><span>Event</span><strong id="tEvent"></strong></div>
-      <div class="ticket-row"><span>Venue</span><strong id="tVenue"></strong></div>
-      <div class="ticket-row"><span>Date & Time</span><strong id="tDateTime"></strong></div>
-      <div class="ticket-row"><span>Seat Number</span><strong id="tSeat"></strong></div>
-      <div class="ticket-row"><span>Ticket ID</span><strong id="tId" class="mono"></strong></div>
-      <div class="ticket-row" id="tAmountRow"><span>Amount Paid</span><strong id="tAmount"></strong></div>
-    </div>
-    <div class="ticket-barcode">
-      <div id="barcodeLines" class="barcode-lines"></div>
-      <div style="padding: 10px; text-align: center; border-top: 1px dashed var(--border); margin-top: 12px;">
-        <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">SCAN FOR ENTRY</p>
-        <div id="actualQRCode" style="display: inline-block; background: #fff; padding: 10px; border-radius: 8px;"></div>
+    <div class="ticket-scroll-body">
+      <div class="ticket-body">
+        <div class="ticket-success-icon">✓</div>
+        <h3>Booking Confirmed!</h3>
+        <p id="ticketSubtitle"></p>
       </div>
-    </div>
-    <div class="ticket-actions">
-      <button class="btn-secondary full" onclick="addToGoogleCalendar()" style="margin-bottom: 8px; width: 100%;">📅 Add to Google Calendar</button>
-      <button class="btn-secondary full" onclick="downloadTicketPDF()" style="margin-bottom: 8px; width: 100%;">📥 Download PDF</button>
-      <button class="btn-primary full" onclick="closeTicketModal(); switchMainTab('myBookings')" style="width: 100%;">View My Bookings</button>
+      <div class="ticket-details">
+        <div class="ticket-row"><span>Event</span><strong id="tEvent"></strong></div>
+        <div class="ticket-row"><span>Venue</span><strong id="tVenue"></strong></div>
+        <div class="ticket-row"><span>Date & Time</span><strong id="tDateTime"></strong></div>
+        <div class="ticket-row"><span>Seat Number</span><strong id="tSeat"></strong></div>
+        <div class="ticket-row"><span>Ticket ID</span><strong id="tId" class="mono"></strong></div>
+        <div class="ticket-row" id="tAmountRow"><span>Amount Paid</span><strong id="tAmount"></strong></div>
+      </div>
+      <div class="ticket-barcode">
+        <div id="barcodeLines" class="barcode-lines"></div>
+        <div style="padding: 10px; text-align: center; border-top: 1px dashed var(--border); margin-top: 12px;">
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px;">SCAN FOR ENTRY</p>
+          <div id="actualQRCode" style="display: inline-block; background: #fff; padding: 10px; border-radius: 8px;"></div>
+        </div>
+      </div>
+      <div class="ticket-actions">
+        <button class="btn-secondary full" onclick="addToGoogleCalendar()" style="width: 100%;">📅 Add to Google Calendar</button>
+        <button class="btn-secondary full" onclick="downloadTicketPDF()" style="width: 100%;">📥 Download PDF</button>
+        <button class="btn-primary full" onclick="closeTicketModal(); switchMainTab('myBookings')" style="width: 100%;">View My Bookings</button>
+      </div>
     </div>
   </div>
 </div>

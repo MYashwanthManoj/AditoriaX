@@ -782,12 +782,25 @@ select {
   position: relative; z-index: 1;
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: var(--radius-lg); width: 95%; max-width: 420px;
-  max-height: 92vh; overflow-y: auto;
+  max-height: 92vh;
+  display: flex; flex-direction: column;    /* flex column: header pinned, body scrolls */
   box-shadow: var(--shadow-modal);
   animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  overflow-x: hidden;
+  overflow: hidden;
 }
-.ticket-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; border-bottom: 1px solid var(--border); background: var(--bg-surface); position: sticky; top: 0; z-index: 2; }
+/* Header always visible at top — never scrolls away */
+.ticket-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  background: var(--bg-surface);
+  flex-shrink: 0;                           /* never squish */
+}
+/* Scrollable content below the header */
+.ticket-scroll-body {
+  overflow-y: auto; overflow-x: hidden;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
 .ticket-logo { font-family: var(--font-display); font-weight: 800; color: #fff; }
 .ticket-body { padding: 28px; text-align: center; background: var(--bg-raised); }
 .ticket-success-icon { width: 56px; height: 56px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.6rem; color: var(--green); font-weight: 900; box-shadow: 0 0 24px rgba(255,255,255,0.2); }
@@ -923,17 +936,14 @@ select {
     width: 100%; max-width: 100%;
     max-height: 90vh;
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-    overflow-y: auto;
-    overflow-x: hidden;
   }
-  .ticket-header { position: sticky; top: 0; z-index: 2; }
   .ticket-body { padding: 20px; }
   .ticket-body h3 { font-size: 1.2rem; }
   .ticket-details { padding: 14px 16px; }
   .ticket-row { font-size: 0.78rem; padding: 7px 0; align-items: flex-start; }
   .ticket-row strong { max-width: 55%; word-break: break-all; }
   .ticket-barcode { padding: 12px 16px; }
-  .ticket-actions { padding: 14px 16px; flex-direction: column; gap: 8px; }
+  .ticket-actions { padding: 14px 16px; }
   .ticket-actions .btn-secondary,
   .ticket-actions .btn-primary { padding: 13px; width: 100%; }
 
