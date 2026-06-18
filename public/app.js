@@ -1704,6 +1704,7 @@ function renderEventsAdmin() {
         Ã°Å¸â€™Âº ${bookedCount}/${capacity} booked
       </div>
       ${state.isSuper ? `<div class="admin-list-actions">
+        <button class="btn-secondary" style="font-size:0.75rem;padding:5px 12px;" onclick="openEditEvent('${ev.id}')">✏️ Edit</button>
         <button class="admin-del-btn" onclick="adminRemoveEvent('${ev.id}')">Delete</button>
       </div>` : ''}
     </div>`;
@@ -1721,6 +1722,98 @@ async function adminRemoveEvent(evtId) {
     renderEventsAdmin();
   } catch(e) { toast(e.message || 'Delete failed','error'); }
 }
+
+// ===== EDIT EVENT (Super Admin inline form) =====
+window.openEditEvent = function(evtId) {
+  const ev  = cache.events.find(e => e.id === evtId);
+  const auds = cache.auditoriums;
+  if (!ev) return;
+
+  const audOptions = auds.map(a =>
+    `<option value="${a.id}" ${a.id === ev.auditoriumId ? 'selected' : ''}>${escH(a.name)} — ${escH(a.college)}</option>`
+  ).join('');
+
+  const catOptions = [
+    ['tech','Tech'],['cultural','Cultural'],['lecture','Lecture'],['sports','Sports'],['other','Other']
+  ].map(([v,l]) => `<option value="${v}" ${v === ev.category ? 'selected' : ''}>${l}</option>`).join('');
+
+  // Find the card in eventsAdminList and replace it with an inline edit form
+  const container = document.getElementById('eventsAdminList');
+  const items = [...container.querySelectorAll('.admin-list-item')];
+  const card = items.find(el => el.querySelector('button')?.getAttribute('onclick')?.includes(evtId));
+  if (!card) return;
+
+  card.dataset.evtId = evtId; // tag for saveEditEvent to find
+  card.innerHTML = `
+    <div style="font-size:0.9rem;font-weight:700;color:var(--accent);margin-bottom:12px;">✏️ Editing: ${escH(ev.title)}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+      <div class="form-field">
+        <label>Title</label>
+        <input id="editEvtTitle" type="text" value="${escH(ev.title)}" />
+      </div>
+      <div class="form-field">
+        <label>Category</label>
+        <select id="editEvtCategory">${catOptions}</select>
+      </div>
+      <div class="form-field">
+        <label>Auditorium</label>
+        <select id="editEvtAuditorium">${audOptions}</select>
+      </div>
+      <div class="form-field">
+        <label>Date</label>
+        <input id="editEvtDate" type="date" value="${ev.date}" />
+      </div>
+      <div class="form-field">
+        <label>Time</label>
+        <input id="editEvtTime" type="time" value="${ev.time}" />
+      </div>
+      <div class="form-field">
+        <label>Duration (hrs)</label>
+        <input id="editEvtDuration" type="number" min="1" max="12" value="${ev.duration || 2}" />
+      </div>
+      <div class="form-field">
+        <label>Price (₹)</label>
+        <input id="editEvtPrice" type="number" min="0" value="${ev.price || 0}" />
+      </div>
+      <div class="form-field">
+        <label>Accent Color</label>
+        <input id="editEvtColor" type="color" value="${ev.color || '#6c63ff'}" style="height:38px;padding:2px 4px;" />
+      </div>
+    </div>
+    <div class="form-field" style="margin-bottom:12px;">
+      <label>Description</label>
+      <textarea id="editEvtDesc" rows="2" style="width:100%;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);padding:8px;font-size:0.85rem;resize:vertical;">${escH(ev.description || '')}</textarea>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn-primary" style="font-size:0.85rem;padding:8px 18px;" onclick="saveEditEvent('${evtId}')">💾 Save Changes</button>
+      <button class="btn-secondary" style="font-size:0.85rem;padding:8px 18px;" onclick="renderEventsAdmin()">Cancel</button>
+    </div>
+  `;
+};
+
+window.saveEditEvent = async function(evtId) {
+  const title       = document.getElementById('editEvtTitle')?.value.trim();
+  const category    = document.getElementById('editEvtCategory')?.value;
+  const auditoriumId= document.getElementById('editEvtAuditorium')?.value;
+  const date        = document.getElementById('editEvtDate')?.value;
+  const time        = document.getElementById('editEvtTime')?.value;
+  const duration    = parseInt(document.getElementById('editEvtDuration')?.value) || 2;
+  const price       = parseInt(document.getElementById('editEvtPrice')?.value) || 0;
+  const color       = document.getElementById('editEvtColor')?.value;
+  const description = document.getElementById('editEvtDesc')?.value.trim();
+
+  if (!title)        { toast('Title is required', 'error'); return; }
+  if (!auditoriumId) { toast('Please select an auditorium', 'error'); return; }
+  if (!date)         { toast('Please select a date', 'error'); return; }
+  if (!time)         { toast('Please select a time', 'error'); return; }
+
+  try {
+    await api.updateEvent(evtId, { title, category, auditoriumId, date, time, duration, price, color, description });
+    await loadCache();
+    toast('✅ Event updated successfully!', 'success');
+    renderEventsAdmin();
+  } catch(e) { toast(e.message || 'Update failed', 'error'); }
+};
 
 function renderBookingsAdmin(filter='') {
   const auds = cache.auditoriums;

@@ -115,6 +115,9 @@ const api = {
   async createEvent(data) {
     return apiFetch(`${API}/events`, { method: 'POST', body: JSON.stringify(data) });
   },
+  async updateEvent(id, data) {
+    return apiFetch(`${API}/events/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify(data) });
+  },
   async deleteEvent(id) {
     return apiFetch(`${API}/events/${encodeURIComponent(id)}`, { method: 'DELETE' });
   },

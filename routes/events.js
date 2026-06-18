@@ -170,6 +170,91 @@ router.post('/', verifyPermission('createEvents'), async (req, res) => {
 });
 
 
+// PUT /api/events/:id  — super admin / institution_admin only
+router.put('/:id', verifyToken, async (req, res) => {
+  try {
+    // Only full admins can edit events
+    if (req.user.role !== 'admin' && req.user.role !== 'institution_admin') {
+      return res.status(403).json({ error: 'Only admins can edit events.' });
+    }
+
+    const evtId = req.params.id;
+    const existing = await Event.findOne({ evtId });
+    if (!existing) return res.status(404).json({ error: 'Event not found' });
+
+    const { title, category, auditoriumId, date, time, duration, price, color, description } = req.body;
+
+    // Use provided values or fall back to existing values
+    const newTitle    = title       !== undefined ? xss(title)       : existing.title;
+    const newCat      = category    !== undefined ? category         : existing.category;
+    const newAudId    = auditoriumId!== undefined ? auditoriumId     : existing.auditoriumId;
+    const newDate     = date        !== undefined ? date             : existing.date;
+    const newTime     = time        !== undefined ? time             : existing.time;
+    const newDuration = duration    !== undefined ? Number(duration) : existing.duration;
+    const newPrice    = price       !== undefined ? Number(price)    : existing.price;
+    const newColor    = color       !== undefined ? color            : existing.color;
+    const newDesc     = description !== undefined ? xss(description) : existing.description;
+
+    // Validate date is not in the past
+    const eventDate = new Date(newDate);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    if (isNaN(eventDate.getTime())) return res.status(400).json({ error: 'Invalid date format' });
+    if (eventDate < today) return res.status(400).json({ error: 'Event date cannot be in the past' });
+
+    // Validate auditorium exists
+    const aud = await Auditorium.findOne({ audId: newAudId });
+    if (!aud) return res.status(404).json({ error: 'Selected auditorium not found' });
+
+    // Venue conflict check (exclude this event itself from the scan)
+    const toMins = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+    const newStart = toMins(newTime);
+    const newEnd   = newStart + newDuration * 60;
+
+    const sameDay = await Event.find({ auditoriumId: newAudId, date: newDate, evtId: { $ne: evtId } });
+    const conflict = sameDay.find(ev => {
+      const evStart = toMins(ev.time);
+      const evEnd   = evStart + (ev.duration || 2) * 60;
+      return newStart < evEnd && newEnd > evStart;
+    });
+
+    if (conflict) {
+      const conflictEnd = `${String(Math.floor(toMins(conflict.time) / 60 + (conflict.duration || 2))).padStart(2,'0')}:${String((toMins(conflict.time) % 60)).padStart(2,'0')}`;
+      return res.status(409).json({
+        error: `Venue conflict: "${conflict.title}" is already scheduled in this auditorium from ${conflict.time}–${conflictEnd} on this date.`
+      });
+    }
+
+    // Apply updates
+    existing.title       = newTitle;
+    existing.category    = newCat;
+    existing.auditoriumId= newAudId;
+    existing.college     = aud.college;
+    existing.date        = newDate;
+    existing.time        = newTime;
+    existing.duration    = newDuration;
+    existing.price       = newPrice;
+    existing.color       = newColor;
+    existing.description = newDesc;
+    await existing.save();
+
+    // Broadcast update to all connected clients
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('event_updated', {
+        id: evtId, title: newTitle, category: newCat,
+        auditoriumId: newAudId, college: aud.college,
+        date: newDate, time: newTime, duration: newDuration,
+        price: newPrice, color: newColor, description: newDesc
+      });
+    }
+
+    res.json({ message: 'Event updated successfully', id: evtId });
+  } catch (err) {
+    console.error('Edit event error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // DELETE /api/events/:id  — requires 'deleteEvents' permission
 router.delete('/:id', verifyPermission('deleteEvents'), async (req, res) => {
   try {
