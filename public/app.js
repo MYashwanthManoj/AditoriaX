@@ -3200,7 +3200,7 @@ function initTheme() {
   const saved = localStorage.getItem('auditoriax-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', saved);
   const btn = document.getElementById('themeToggleBtn');
-  if (btn) btn.textContent = saved === 'light' ? '☀️' : '🌙
+  if (btn) btn.textContent = saved === 'light' ? '☀️' : '🌙';
 }
 
 window.toggleTheme = function() {
@@ -3210,7 +3210,7 @@ window.toggleTheme = function() {
   localStorage.setItem('auditoriax-theme', next);
   const btn = document.getElementById('themeToggleBtn');
   if (btn) {
-    btn.textContent = next === 'light' ? '☀️' : '🌙
+    btn.textContent = next === 'light' ? '☀️' : '🌙';
     btn.style.transform = 'rotate(180deg)';
     setTimeout(() => { btn.style.transform = ''; }, 350);
   }
