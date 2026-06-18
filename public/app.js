@@ -1,12 +1,12 @@
 /* =====================================================
-   AUDITORIAX — FULL APPLICATION LOGIC
+   AUDITORIAX Ã¢â‚¬â€ FULL APPLICATION LOGIC
    Multi-college auditorium booking platform
    Features: Auth, Events, Seat Selection, Payment, Admin
 ====================================================== */
 
 // ===== CONSTANTS =====
 const SK = { USERS: 'ax_users', AUDITORIUMS: 'ax_auds', EVENTS: 'ax_evts', BOOKINGS: 'ax_bkgs', SESSION: 'ax_session' };
-const CATEGORIES = { tech:'🖥 Tech', cultural:'🎭 Cultural', lecture:' Lecture', sports:'⚽ Sports', other:'📌 Other' };
+const CATEGORIES = { tech:'Ã°Å¸â€“Â¥ Tech', cultural:'Ã°Å¸Å½Â­ Cultural', lecture:' Lecture', sports:'Ã¢Å¡Â½ Sports', other:'Ã°Å¸â€œÅ’ Other' };
 const CATEGORY_COLORS = { tech:'#5b8dee', cultural:'#f472b6', lecture:'#22d87a', sports:'#fb923c', other:'#8888a8' };
 
 // ===== STATE =====
@@ -56,12 +56,12 @@ const defaultAuditoriums = [
 ];
 
 const defaultEvents = [
-  { id:'evt_1', title:'TechFest 2025', category:'tech', auditoriumId:'aud_1', college:'KL University', date:futureDate(3), time:'10:00', duration:6, clusters:['1','2','3'], price:0, color:'#5b8dee', description:'KLU\'s biggest annual tech symposium! Hackathons, robotics competitions, AI workshops, and prize pool of ₹5 lakhs.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
+  { id:'evt_1', title:'TechFest 2025', category:'tech', auditoriumId:'aud_1', college:'KL University', date:futureDate(3), time:'10:00', duration:6, clusters:['1','2','3'], price:0, color:'#5b8dee', description:'KLU\'s biggest annual tech symposium! Hackathons, robotics competitions, AI workshops, and prize pool of Ã¢â€šÂ¹5 lakhs.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
   { id:'evt_2', title:'Cultural Fiesta 2025', category:'cultural', auditoriumId:'aud_2', college:'KL University', date:futureDate(7), time:'17:00', duration:5, clusters:['1','2','3','4','5'], price:0, color:'#f472b6', description:'An evening of dance, music, drama, and fashion. Clusters 1-5 welcome! Performances by 30+ student groups.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
   { id:'evt_3', title:'AI Revolution: Guest Lecture', category:'lecture', auditoriumId:'aud_3', college:'VIT University', date:futureDate(2), time:'11:00', duration:3, clusters:['1','2','3','4','5'], price:250, color:'#22d87a', description:'Keynote by Dr. Rajeev Menon, Chief AI Officer at Infosys. Topics: LLMs, Generative AI, and the future of work. Open to all colleges.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
   { id:'evt_4', title:'National Coding Championship', category:'tech', auditoriumId:'aud_4', college:'SRM University', date:futureDate(10), time:'09:00', duration:8, clusters:['1','2','3','4','5'], price:199, color:'#fb923c', description:'Compete against coders from 100+ colleges. DSA rounds, system design, and a final hackathon. Top 3 win cash prizes + internship offers.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
   { id:'evt_5', title:'Inter-College Debate Championship', category:'cultural', auditoriumId:'aud_1', college:'KL University', date:futureDate(14), time:'14:00', duration:4, clusters:['2','3','4'], price:0, color:'#a78bfa', description:'Regional debate championship open to all colleges. Topics include climate policy, AI ethics, and economic reforms. Register your 2-member team.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
-  { id:'evt_6', title:'Startup Pitch Day 2025', category:'other', auditoriumId:'aud_3', college:'VIT University', date:futureDate(5), time:'13:00', duration:5, clusters:['1','2','3','4','5'], price:149, color:'#34d399', description:'Present your startup idea to a panel of VCs and angel investors. Best pitch wins ₹1 Lakh funding + mentorship. Open to all college teams.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
+  { id:'evt_6', title:'Startup Pitch Day 2025', category:'other', auditoriumId:'aud_3', college:'VIT University', date:futureDate(5), time:'13:00', duration:5, clusters:['1','2','3','4','5'], price:149, color:'#34d399', description:'Present your startup idea to a panel of VCs and angel investors. Best pitch wins Ã¢â€šÂ¹1 Lakh funding + mentorship. Open to all college teams.', createdBy:'admin@system.com', createdAt:new Date().toISOString() },
 ];
 
 // ===== LOAD CACHE FROM API =====
@@ -139,8 +139,8 @@ function onSignupEmailInput() {
 
 function togglePw(id, btn) {
   const inp = document.getElementById(id);
-  if (inp.type === 'password') { inp.type='text'; btn.textContent='🙈'; }
-  else { inp.type='password'; btn.textContent='👁'; }
+  if (inp.type === 'password') { inp.type='text'; btn.textContent='Ã°Å¸â„¢Ë†'; }
+  else { inp.type='password'; btn.textContent='Ã°Å¸â€˜Â'; }
 }
 
 // Helper: Get Cookie value
@@ -182,7 +182,7 @@ async function handleLogin() {
     await loadCache();
     await loadMyBookings();
     showMainApp();
-    toast(`Welcome back, ${email.split('@')[0]}! 👋`, 'success');
+    toast(`Welcome back, ${email.split('@')[0]}! Ã°Å¸â€˜â€¹`, 'success');
   } catch(e) { 
     toast(e.message || 'Invalid email or password','error'); 
     btn.disabled = false;
@@ -221,7 +221,7 @@ async function handleSignup() {
     state.isAdmin = userData.isAdmin;
     await loadCache();
     await loadMyBookings();
-    toast('Account created! Welcome aboard! 🎉','success');
+    toast('Account created! Welcome aboard! Ã°Å¸Å½â€°','success');
     showMainApp();
   } catch(e) { toast(e.message || 'Signup failed','error'); }
 }
@@ -292,7 +292,7 @@ function showMainApp() {
     regBtn.className = 'btn-secondary';
     regBtn.title = 'Register your institution';
     regBtn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:8000;padding:10px 18px;font-size:0.85rem;border-radius:10px;background:var(--surface2);border:1px solid var(--accent);color:var(--accent);box-shadow:0 4px 20px rgba(248,68,100,0.25);display:flex;align-items:center;gap:8px';
-    regBtn.innerHTML = '🏛 Register Your Institution';
+    regBtn.innerHTML = 'Ã°Å¸Ââ€º Register Your Institution';
     regBtn.onclick = showRegisterInstitution;
     document.body.appendChild(regBtn);
   } else if (regBtn && (hasInstitution || !canRegister)) {
@@ -300,7 +300,7 @@ function showMainApp() {
   }
 }
 
-// loginUser() removed — was dead code calling nonexistent api.getUser()
+// loginUser() removed Ã¢â‚¬â€ was dead code calling nonexistent api.getUser()
 
 async function handleLogout() {
   try { await api.logout(); } catch(e) {}
@@ -392,7 +392,7 @@ async function exportAttendeesCSV() {
     // Open in a new tab to trigger the download with cookies
     const url = '/api/bookings/export-csv';
     window.open(url, '_blank');
-    toast('✅ Preparing CSV download...', 'success');
+    toast('Ã¢Å“â€¦ Preparing CSV download...', 'success');
   } catch(e) { toast('Failed to export CSV', 'error'); }
 }
 
@@ -431,13 +431,13 @@ function updateHero() {
   document.getElementById('heroEventName').textContent = ev.title;
   const auds = get(SK.AUDITORIUMS, []);
   const aud = auds.find(a => a.id === ev.auditoriumId);
-  document.getElementById('heroEventMeta').textContent = `${ev.college} · ${formatDate(ev.date)} at ${ev.time} · ${aud?.name || ''}`;
+  document.getElementById('heroEventMeta').textContent = `${ev.college} Ã‚Â· ${formatDate(ev.date)} at ${ev.time} Ã‚Â· ${aud?.name || ''}`;
 
   const tagsEl = document.getElementById('heroEventTags');
   tagsEl.innerHTML = `
     <span class="hero-tag accent">${CATEGORIES[ev.category]||ev.category}</span>
-    <span class="hero-tag">${ev.price === 0 ? '🆓 Free Entry' : `₹${ev.price}`}</span>
-    <span class="hero-tag">⏱ ${ev.duration}h</span>
+    <span class="hero-tag">${ev.price === 0 ? 'Ã°Å¸â€ â€œ Free Entry' : `Ã¢â€šÂ¹${ev.price}`}</span>
+    <span class="hero-tag">Ã¢ÂÂ± ${ev.duration}h</span>
   `;
 
   document.querySelector('.hero-section').style.borderLeft = `4px solid ${ev.color}`;
@@ -564,13 +564,13 @@ function eventCardHTML(ev) {
 
   let priceLabel, priceClass;
   if (!isStudent) {
-    priceLabel = ev.price === 0 ? '🆓 Free' : `₹${ev.price}`;
+    priceLabel = ev.price === 0 ? 'Ã°Å¸â€ â€œ Free' : `Ã¢â€šÂ¹${ev.price}`;
     priceClass = ev.price === 0 ? 'price-free' : 'price-paid';
   } else if (isSameCollege) {
-    priceLabel = '🆓 Free (your college)';
+    priceLabel = 'Ã°Å¸â€ â€œ Free (your college)';
     priceClass = 'price-free';
   } else {
-    priceLabel = ev.price === 0 ? '🆓 Free' : `₹${ev.price} (external)`;
+    priceLabel = ev.price === 0 ? 'Ã°Å¸â€ â€œ Free' : `Ã¢â€šÂ¹${ev.price} (external)`;
     priceClass = ev.price === 0 ? 'price-free' : 'price-paid';
   }
 
@@ -578,18 +578,18 @@ function eventCardHTML(ev) {
 
   let footerAction = '';
   if (alreadyBooked) {
-    footerAction = `<span style="font-size:0.75rem;color:var(--green);font-weight:600;">✓ Booked</span>`;
+    footerAction = `<span style="font-size:0.75rem;color:var(--green);font-weight:600;">Ã¢Å“â€œ Booked</span>`;
   } else if (availableSeats <= 0) {
-    // FUTURE-04: Waitlist — check if already in queue
+    // FUTURE-04: Waitlist Ã¢â‚¬â€ check if already in queue
     const myWL = cache.myWaitlist || [];
     const wlEntry = myWL.find(w => w.eventId === ev.id);
     if (wlEntry) {
-      footerAction = `<span style="font-size:0.75rem;color:var(--orange);font-weight:600;">📋 In Queue #${wlEntry.position}</span>`;
+      footerAction = `<span style="font-size:0.75rem;color:var(--orange);font-weight:600;">Ã°Å¸â€œâ€¹ In Queue #${wlEntry.position}</span>`;
     } else {
-      footerAction = `<button class="btn-secondary" style="font-size:0.78rem;padding:7px 14px;border-color:var(--orange);color:var(--orange);" onclick="joinWaitlist('${ev.id}','${escH(ev.title)}',event)">📋 Join Waitlist</button>`;
+      footerAction = `<button class="btn-secondary" style="font-size:0.78rem;padding:7px 14px;border-color:var(--orange);color:var(--orange);" onclick="joinWaitlist('${ev.id}','${escH(ev.title)}',event)">Ã°Å¸â€œâ€¹ Join Waitlist</button>`;
     }
   } else {
-    footerAction = `<button class="btn-primary" style="font-size:0.8rem;padding:8px 16px;">Book Seat →</button>`;
+    footerAction = `<button class="btn-primary" style="font-size:0.8rem;padding:8px 16px;">Book Seat Ã¢â€ â€™</button>`;
   }
 
   return `
@@ -601,19 +601,20 @@ function eventCardHTML(ev) {
       </div>
       <div class="event-body">
         <div>
-          <div class="event-college-tag">🏛 ${escH(ev.college)}</div>
+          <div class="event-college-tag">Ã°Å¸Ââ€º ${escH(ev.college)}</div>
           <div class="event-title" style="margin-top:8px">${escH(ev.title)}</div>
         </div>
         <div class="event-meta">
-          <div class="event-meta-item">📅 ${formatDate(ev.date)} · ${ev.time}–${addHours(ev.time,ev.duration)}</div>
-          <div class="event-meta-item">🎪 ${escH(aud?.name||'TBA')} · ${escH(aud?.city||'')}</div>
-          <div class="event-meta-item">⏱ ${ev.duration} hour${ev.duration!==1?'s':''}</div>
+          <div class="event-meta-item">Ã°Å¸â€œâ€¦ ${formatDate(ev.date)} Ã‚Â· ${ev.time}Ã¢â‚¬â€œ${addHours(ev.time,ev.duration)}</div>
+          <div class="event-meta-item">Ã°Å¸Å½Âª ${escH(aud?.name||'TBA')} Ã‚Â· ${escH(aud?.city||'')}</div>
+          <div class="event-meta-item">Ã¢ÂÂ± ${ev.duration} hour${ev.duration!==1?'s':''}</div>
+          ${(() => { const cd = getCountdown(ev.date, ev.time); return cd ? `<div class="event-countdown-badge">${cd}</div>` : `<div class="event-expired-badge">Event ended</div>`; })()}
         </div>
         <p class="event-desc">${escH(ev.description||'')}</p>
         <div class="event-foot">
           <span class="event-availability">
             <span class="availability-dot ${dotClass}"></span>
-            ${availableSeats} seats · ${availLabel}
+            ${availableSeats} seats Ã‚Â· ${availLabel}
           </span>
           ${footerAction}
         </div>
@@ -627,7 +628,7 @@ async function openBookingModal(ev) {
   document.getElementById('modalTitle').textContent = ev.title;
   const auds = get(SK.AUDITORIUMS, []);
   const aud = auds.find(a => a.id === ev.auditoriumId);
-  document.getElementById('modalMeta').textContent = `${ev.college} · ${formatDate(ev.date)} at ${ev.time}`;
+  document.getElementById('modalMeta').textContent = `${ev.college} Ã‚Â· ${formatDate(ev.date)} at ${ev.time}`;
 
   document.getElementById('modalStep1').classList.remove('hidden');
   document.getElementById('modalStep2').classList.add('hidden');
@@ -655,9 +656,9 @@ function renderAuditoriumCards(ev) {
     const seats = bkgs_aud.seats[ev.id] || Array(a.capacity).fill(false);
     const avail = seats.filter(s=>!s).length;
     return `<div class="aud-card" onclick="selectAuditorium('${a.id}')">
-      <div class="aud-card-name">🎪 ${escH(a.name)}</div>
-      <div class="aud-card-meta">🏛 ${escH(a.college)}<br>📍 ${escH(a.city)}<br>💺 Capacity: ${a.capacity}</div>
-      <div class="aud-card-avail">✅ ${avail} seats available</div>
+      <div class="aud-card-name">Ã°Å¸Å½Âª ${escH(a.name)}</div>
+      <div class="aud-card-meta">Ã°Å¸Ââ€º ${escH(a.college)}<br>Ã°Å¸â€œÂ ${escH(a.city)}<br>Ã°Å¸â€™Âº Capacity: ${a.capacity}</div>
+      <div class="aud-card-avail">Ã¢Å“â€¦ ${avail} seats available</div>
     </div>`;
   }).join('');
   document.getElementById('auditoriumCards').innerHTML = html || '<p style="color:var(--text-muted)">No auditoriums available.</p>';
@@ -700,18 +701,18 @@ async function renderSeatMap(aud, ev) {
   document.getElementById('sumEvent').textContent = ev.title;
   document.getElementById('sumAud').textContent = aud.name;
   document.getElementById('sumDate').textContent = formatDate(ev.date);
-  document.getElementById('sumTime').textContent = `${ev.time} – ${addHours(ev.time, ev.duration)}`;
+  document.getElementById('sumTime').textContent = `${ev.time} Ã¢â‚¬â€œ ${addHours(ev.time, ev.duration)}`;
   document.getElementById('sumSeatRow').style.display = 'none';
 
   const price = isExternalStudent ? ev.price : 0;
-  document.getElementById('sumPrice').textContent = price === 0 ? '🆓 Free' : `₹${price}`;
+  document.getElementById('sumPrice').textContent = price === 0 ? 'Ã°Å¸â€ â€œ Free' : `Ã¢â€šÂ¹${price}`;
   document.getElementById('sumPriceRow').style.display = '';
 
   if (isStudent) {
-    const priceSuffix = isSameCollege ? ' · 🆓 Free (your college event)' : (ev.price > 0 ? ' · Payment required (external)' : '');
-    document.getElementById('sectionInfo').textContent = `Your section: Seats ${minSeat}–${maxSeat} (${ud.gender==='F'?'Girls':'Boys'} Section)${priceSuffix}`;
+    const priceSuffix = isSameCollege ? ' Ã‚Â· Ã°Å¸â€ â€œ Free (your college event)' : (ev.price > 0 ? ' Ã‚Â· Payment required (external)' : '');
+    document.getElementById('sectionInfo').textContent = `Your section: Seats ${minSeat}Ã¢â‚¬â€œ${maxSeat} (${ud.gender==='F'?'Girls':'Boys'} Section)${priceSuffix}`;
   } else if (!state.isAdmin && ud?.role==='teacher') {
-    document.getElementById('sectionInfo').textContent = `Teacher section: Seats 1–${teacherCount}`;
+    document.getElementById('sectionInfo').textContent = `Teacher section: Seats 1Ã¢â‚¬â€œ${teacherCount}`;
   } else {
     document.getElementById('sectionInfo').textContent = `Admin: Full access to all seats`;
   }
@@ -724,9 +725,9 @@ async function renderSeatMap(aud, ev) {
   container.innerHTML = '';
 
   const sections = [
-    { label: ` TEACHER SECTION · Seats 1–${teacherCount} (${teacherCount} seats)`, from:1, to:teacherCount, seatClass:'seat-teacher' },
-    { label: ` FEMALE STUDENT SECTION · Seats ${teacherCount+1}–${femaleEnd} (${girlCount} seats)`, from:teacherCount+1, to:femaleEnd, seatClass:'seat-girl' },
-    { label: ` MALE STUDENT SECTION · Seats ${femaleEnd+1}–${cap} (${boyCount} seats)`, from:femaleEnd+1, to:cap, seatClass:'seat-boy' },
+    { label: ` TEACHER SECTION Ã‚Â· Seats 1Ã¢â‚¬â€œ${teacherCount} (${teacherCount} seats)`, from:1, to:teacherCount, seatClass:'seat-teacher' },
+    { label: ` FEMALE STUDENT SECTION Ã‚Â· Seats ${teacherCount+1}Ã¢â‚¬â€œ${femaleEnd} (${girlCount} seats)`, from:teacherCount+1, to:femaleEnd, seatClass:'seat-girl' },
+    { label: ` MALE STUDENT SECTION Ã‚Â· Seats ${femaleEnd+1}Ã¢â‚¬â€œ${cap} (${boyCount} seats)`, from:femaleEnd+1, to:cap, seatClass:'seat-boy' },
   ];
 
   sections.forEach(sec => {
@@ -816,7 +817,7 @@ function selectSeat(num, el) {
   document.getElementById('sumSeatRow').style.display = '';
 
   document.getElementById('confirmBtn').disabled = false;
-  document.getElementById('confirmBtn').textContent = `Confirm Seat ${num} →`;
+  document.getElementById('confirmBtn').textContent = `Confirm Seat ${num} Ã¢â€ â€™`;
 }
 
 async function confirmBooking() {
@@ -839,7 +840,7 @@ async function confirmBooking() {
     // Seat already taken or locked by someone else
     toast(e.message || 'Seat unavailable. Please select another.', 'error');
     btn.disabled = false;
-    btn.textContent = `Confirm Seat ${seat} →`;
+    btn.textContent = `Confirm Seat ${seat} Ã¢â€ â€™`;
     // Refresh the seat map so this seat appears booked
     await renderSeatMap(auditorium, event);
     return;
@@ -849,7 +850,7 @@ async function confirmBooking() {
     closeBookingModal();
     openPaymentModal(price, event, auditorium, seat);
   } else {
-    // Free booking — finalize immediately, lock will be cleaned up by finalizeBooking
+    // Free booking Ã¢â‚¬â€ finalize immediately, lock will be cleaned up by finalizeBooking
     await finalizeBooking(event, auditorium, seat, 0, null);
     closeBookingModal();
   }
@@ -861,8 +862,8 @@ let selectedPM = 'upi';
 function openPaymentModal(price, event, auditorium, seat) {
   state.pendingPayment = { price, event, auditorium, seat };
   selectedPM = 'upi';
-  document.getElementById('payAmount').textContent = `₹${price}`;
-  document.getElementById('payNowBtn').querySelector('#payBtnText').textContent = `Pay ₹${price} via UPI`;
+  document.getElementById('payAmount').textContent = `Ã¢â€šÂ¹${price}`;
+  document.getElementById('payNowBtn').querySelector('#payBtnText').textContent = `Pay Ã¢â€šÂ¹${price} via UPI`;
   document.getElementById('payNowBtn').disabled = false;
   document.getElementById('paymentModal').classList.remove('hidden');
   // Reset selection
@@ -886,7 +887,7 @@ function selectPM(el, method) {
   el.classList.add('selected');
   const price = state.pendingPayment?.price || 0;
   const labels = { upi: 'UPI', card: 'Card', netbanking: 'Net Banking', wallet: 'Wallet' };
-  document.getElementById('payBtnText').textContent = `Pay ₹${price} via ${labels[method] || 'Razorpay'}`;
+  document.getElementById('payBtnText').textContent = `Pay Ã¢â€šÂ¹${price} via ${labels[method] || 'Razorpay'}`;
 }
 
 async function initiateRazorpayPayment() {
@@ -921,7 +922,7 @@ async function initiateRazorpayPayment() {
       currency: order.currency,
       order_id: order.orderId,
       name: 'AuditoriaX',
-      description: `${event.title} — Seat #${seat}`,
+      description: `${event.title} Ã¢â‚¬â€ Seat #${seat}`,
       theme: { color: '#6c63ff' },
       prefill: {
         email: state.currentUser,
@@ -968,22 +969,22 @@ async function initiateRazorpayPayment() {
           if (verification.verified) {
             closePaymentModal();
             await finalizeBooking(event, auditorium, seat, price, verification.paymentId);
-            toast('Payment successful! 🎉', 'success');
+            toast('Payment successful! Ã°Å¸Å½â€°', 'success');
           }
         } catch(e) {
           toast('Payment verification failed: ' + (e.message || 'Unknown error'), 'error');
           btn.disabled = false;
-          btnTxt.textContent = `Pay ₹${price} via ${selectedPM.toUpperCase()}`;
+          btnTxt.textContent = `Pay Ã¢â€šÂ¹${price} via ${selectedPM.toUpperCase()}`;
         }
       },
       modal: {
         ondismiss: function() {
           btn.disabled = false;
           const labels = { upi: 'UPI', card: 'Card', netbanking: 'Net Banking', wallet: 'Wallet' };
-          btnTxt.textContent = `Pay ₹${price} via ${labels[selectedPM] || 'Razorpay'}`;
+          btnTxt.textContent = `Pay Ã¢â€šÂ¹${price} via ${labels[selectedPM] || 'Razorpay'}`;
           // Release seat lock on payment dismiss
           api.unlockSeat(event.id).catch(() => {});
-          toast('Payment cancelled — seat unlocked', 'info');
+          toast('Payment cancelled Ã¢â‚¬â€ seat unlocked', 'info');
         }
       }
     };
@@ -993,7 +994,7 @@ async function initiateRazorpayPayment() {
       toast('Payment failed: ' + (response.error.description || 'Please try again'), 'error');
       btn.disabled = false;
       const labels = { upi: 'UPI', card: 'Card', netbanking: 'Net Banking', wallet: 'Wallet' };
-      btnTxt.textContent = `Pay ₹${price} via ${labels[selectedPM] || 'Razorpay'}`;
+      btnTxt.textContent = `Pay Ã¢â€šÂ¹${price} via ${labels[selectedPM] || 'Razorpay'}`;
       // Release seat lock on payment failure too
       api.unlockSeat(event.id).catch(() => {});
     });
@@ -1003,7 +1004,7 @@ async function initiateRazorpayPayment() {
     toast('Failed to create payment order: ' + (e.message || 'Server error'), 'error');
     btn.disabled = false;
     const labels = { upi: 'UPI', card: 'Card', netbanking: 'Net Banking', wallet: 'Wallet' };
-    btnTxt.textContent = `Pay ₹${price} via ${labels[selectedPM] || 'Razorpay'}`;
+    btnTxt.textContent = `Pay Ã¢â€šÂ¹${price} via ${labels[selectedPM] || 'Razorpay'}`;
   }
 }
 
@@ -1040,13 +1041,13 @@ function showTicketModal(booking, aud) {
   document.getElementById('ticketSubtitle').textContent = `Your ticket for ${booking.eventTitle} is confirmed`;
   document.getElementById('tEvent').textContent = booking.eventTitle;
   document.getElementById('tVenue').textContent = booking.auditoriumName;
-  document.getElementById('tDateTime').textContent = `${formatDate(booking.date)} · ${booking.time}`;
+  document.getElementById('tDateTime').textContent = `${formatDate(booking.date)} Ã‚Â· ${booking.time}`;
   document.getElementById('tSeat').textContent = `#${booking.seat}`;
   document.getElementById('tId').textContent = booking.id;
 
   const amountRow = document.getElementById('tAmountRow');
   if (booking.price > 0) {
-    document.getElementById('tAmount').textContent = `₹${booking.price} · ${booking.txId}`;
+    document.getElementById('tAmount').textContent = `Ã¢â€šÂ¹${booking.price} Ã‚Â· ${booking.txId}`;
     amountRow.style.display='';
   } else {
     amountRow.style.display='none';
@@ -1084,19 +1085,45 @@ function closeTicketModal() {
 
 // ===== MY BOOKINGS =====
 async function renderMyBookings() {
+  const container = document.getElementById('bookingsContainer');
+
+  // Show skeleton loaders immediately
+  container.innerHTML = Array(3).fill(`
+    <div class="booking-ticket" style="pointer-events:none">
+      <div class="booking-ticket-accent skeleton" style="background:transparent"></div>
+      <div class="booking-ticket-body">
+        <div class="booking-ticket-top">
+          <div style="flex:1">
+            <div class="skeleton skeleton-text" style="width:30%;margin-bottom:8px"></div>
+            <div class="skeleton skeleton-title" style="width:70%"></div>
+            <div class="skeleton skeleton-text" style="width:55%;margin-top:6px"></div>
+          </div>
+          <div class="skeleton" style="width:72px;height:24px;border-radius:12px"></div>
+        </div>
+        <div class="booking-ticket-grid" style="margin:14px 0">
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text"></div>
+        </div>
+        <div class="booking-ticket-foot">
+          <div class="skeleton skeleton-text" style="width:40%"></div>
+          <div class="skeleton skeleton-btn" style="width:80px;height:30px"></div>
+        </div>
+      </div>
+    </div>`).join('');
+
   await loadMyBookings();
   const ud = state.currentUserData;
-  const container = document.getElementById('bookingsContainer');
 
   let myBookings = cache.myBookings || [];
 
-
   if (!myBookings.length) {
     container.innerHTML = `<div class="no-bookings-msg">
-      <div style="font-size:3rem;margin-bottom:16px">🎟️</div>
+      <div style="font-size:3rem;margin-bottom:16px">Ã°Å¸Å½Å¸Ã¯Â¸Â</div>
       <h4 style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:8px">No bookings yet</h4>
       <p>Browse events and book your first seat!</p>
-      <br><a onclick="switchMainTab('explore')">→ Explore Events</a>
+      <br><a onclick="switchMainTab('explore')">Ã¢â€ â€™ Explore Events</a>
     </div>`;
     return;
   }
@@ -1123,29 +1150,35 @@ async function renderMyBookings() {
 
 function bookingTicketHTML(b) {
   const color = b.color || '#5b8dee';
-  const cat = CATEGORIES[b.category] || '📌';
-  return `<div class="booking-ticket">
-    <div class="booking-ticket-accent" style="background:${color}"></div>
+  const cat = CATEGORIES[b.category] || 'Ã°Å¸â€œÅ’';
+  const isPast = new Date(b.date) < new Date(new Date().toDateString());
+  const statusBadge = isPast
+    ? `<span class="booking-ticket-status expired">Ã¢Å“â€œ Attended</span>`
+    : `<span class="booking-ticket-status">Ã¢Å“â€œ Confirmed</span>`;
+  const countdown = !isPast ? getCountdown(b.date, b.time) : null;
+  return `<div class="booking-ticket${isPast ? ' booking-ticket-past' : ''}">
+    <div class="booking-ticket-accent" style="background:${isPast ? '#444' : color}"></div>
     <div class="booking-ticket-body">
       <div class="booking-ticket-top">
         <div>
           <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:4px">${cat}</div>
           <div class="booking-ticket-title">${escH(b.eventTitle)}</div>
-          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">🏛 ${escH(b.eventCollege||'')} · 🎪 ${escH(b.auditoriumName)}</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">Ã°Å¸Ââ€º ${escH(b.eventCollege||'')} Ã‚Â· Ã°Å¸Å½Âª ${escH(b.auditoriumName)}</div>
         </div>
-        <span class="booking-ticket-status">✓ Confirmed</span>
+        ${statusBadge}
       </div>
       <div class="booking-ticket-grid">
         <div class="bt-item"><div class="bt-label">Date</div><div class="bt-value">${formatDate(b.date)}</div></div>
         <div class="bt-item"><div class="bt-label">Time</div><div class="bt-value">${b.time}</div></div>
-        <div class="bt-item"><div class="bt-label">Seat</div><div class="bt-value" style="color:${color};font-size:1.1rem">#${b.seat}</div></div>
-        <div class="bt-item"><div class="bt-label">Amount</div><div class="bt-value">${b.price>0?`₹${b.price}`:'Free'}</div></div>
+        <div class="bt-item"><div class="bt-label">Seat</div><div class="bt-value" style="color:${isPast?'var(--text-muted)':color};font-size:1.1rem">#${b.seat}</div></div>
+        <div class="bt-item"><div class="bt-label">Amount</div><div class="bt-value">${b.price>0?`Ã¢â€šÂ¹${b.price}`:'Free'}</div></div>
       </div>
+      ${countdown ? `<div class="bt-countdown">Ã°Å¸â€¢Â ${countdown}</div>` : ''}
       <div class="booking-ticket-foot">
-        <span class="ticket-id-display">🎟 ${b.id}</span>
+        <span class="ticket-id-display">Ã°Å¸Å½Å¸ ${b.id}</span>
         <div style="display:flex; gap:8px;">
           <button class="btn-primary show-qr-btn" data-id="${b.id}" style="padding:6px 14px;font-size:0.78rem">Show QR</button>
-          <button class="btn-danger cancel-booking-btn" data-id="${b.id}" style="padding:6px 14px;font-size:0.78rem">Cancel</button>
+          ${!isPast ? `<button class="btn-danger cancel-booking-btn" data-id="${b.id}" style="padding:6px 14px;font-size:0.78rem">Cancel</button>` : ''}
         </div>
       </div>
     </div>
@@ -1172,7 +1205,7 @@ function renderProfile() {
   document.getElementById('profileRoleTag').textContent = state.isAdmin ? ' Admin' : ud.role === 'student' ? ` Student` : ' Teacher';
   document.getElementById('profileCollegeName').textContent = ud.college || '';
   document.getElementById('pEmail').textContent = ud.email;
-  document.getElementById('pCollege').textContent = ud.college || '—';
+  document.getElementById('pCollege').textContent = ud.college || 'Ã¢â‚¬â€';
   document.getElementById('pSince').textContent = new Date(ud.createdAt).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'});
 
   const isKLH = ud.role === 'student' && ud.email && ud.email.endsWith('@klh.edu.in');
@@ -1189,7 +1222,7 @@ function renderProfile() {
 
     // Show locked gender in edit section
     const genderLockedEl = document.getElementById('pGenderLocked');
-    genderLockedEl.innerHTML = `${ud.gender === 'F' ? 'Female' : 'Male'} <span style="color:var(--text-muted);font-size:0.75rem">🔒 Permanent</span>`;
+    genderLockedEl.innerHTML = `${ud.gender === 'F' ? 'Female' : 'Male'} <span style="color:var(--text-muted);font-size:0.75rem">Ã°Å¸â€â€™ Permanent</span>`;
 
     if (isKLH) {
       document.getElementById('pClusterRow').classList.remove('hidden');
@@ -1216,7 +1249,7 @@ function renderProfile() {
           notice.style.cssText = 'color:#f59e0b;font-size:0.8rem;margin-top:10px;line-height:1.5';
           document.getElementById('editStudentSection').appendChild(notice);
         }
-        notice.textContent = `🔒 Cluster locked · Next edit in ${daysLeft} day${daysLeft!==1?'s':''} (${cooldownLabel} cooldown · unlocks ${nextChangeDate.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})})`;
+        notice.textContent = `Ã°Å¸â€â€™ Cluster locked Ã‚Â· Next edit in ${daysLeft} day${daysLeft!==1?'s':''} (${cooldownLabel} cooldown Ã‚Â· unlocks ${nextChangeDate.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})})`;
       } else {
         editCluster.disabled = false;
         if (saveBtn) saveBtn.disabled = false;
@@ -1244,7 +1277,7 @@ async function saveStudentInfo() {
     state.currentUserData = updated;
     const isKLH = updated.email && updated.email.endsWith('@klh.edu.in');
     if (isKLH) {
-      document.getElementById('navRoleBadge').textContent = `Student · C${updated.cluster}`;
+      document.getElementById('navRoleBadge').textContent = `Student Ã‚Â· C${updated.cluster}`;
     }
     const cooldownLabel = isKLH ? '3 months' : '1 month';
     toast('Cluster updated! Next edit available in ' + cooldownLabel + '.', 'success');
@@ -1297,7 +1330,7 @@ function renderAnalytics() {
   const allSeats = cache.allSeats;
   const auds = cache.auditoriums;
 
-  // ─── Compute totals ──────────────────────────────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Compute totals Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   let totalRev = 0, totalBkgs = 0, totalCap = 0;
   const byCat = {}, byMonthLabel = {}, byAud = {}, revMap = {}, byDow = { Sun:0, Mon:0, Tue:0, Wed:0, Thu:0, Fri:0, Sat:0 };
   const MONTHS_ORDER = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -1332,18 +1365,18 @@ function renderAnalytics() {
     revMap[e.title] = (revMap[e.title] || 0) + bCount * (e.price || 0);
   });
 
-  // ─── KPI Row ─────────────────────────────────────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ KPI Row Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   const occupancyPct = totalCap ? Math.round((totalBkgs / totalCap) * 100) : 0;
   document.getElementById('analyticsKPIRow').innerHTML = `
     <div class="analytics-kpi"><div class="kpi-val">${evts.length}</div><div class="kpi-lbl">Total Events</div></div>
     <div class="analytics-kpi"><div class="kpi-val">${totalBkgs}</div><div class="kpi-lbl">Total Bookings</div></div>
     <div class="analytics-kpi"><div class="kpi-val">${occupancyPct}%</div><div class="kpi-lbl">Avg. Occupancy</div></div>
-    <div class="analytics-kpi"><div class="kpi-val">₹${totalRev.toLocaleString('en-IN')}</div><div class="kpi-lbl">Total Revenue</div></div>
+    <div class="analytics-kpi"><div class="kpi-val">Ã¢â€šÂ¹${totalRev.toLocaleString('en-IN')}</div><div class="kpi-lbl">Total Revenue</div></div>
   `;
 
-  // ─── Chart defaults ───────────────────────────────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Chart defaults Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   if (typeof Chart === 'undefined') {
-    console.warn('Chart.js not loaded yet — retrying in 300ms');
+    console.warn('Chart.js not loaded yet Ã¢â‚¬â€ retrying in 300ms');
     setTimeout(renderAnalytics, 300);
     return;
   }
@@ -1354,10 +1387,10 @@ function renderAnalytics() {
 
   const gridColor = 'rgba(255,255,255,0.06)';
 
-  // ─── CHART 1: Events by Category (Doughnut) ───────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CHART 1: Events by Category (Doughnut) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   _destroyChart('chartCategory');
   const catLabels = Object.keys(byCat);
-  const catColors = ['#F84464','#2B8DE3','#2DC492','#FF9900','#a855f7','#E84C88'];
+  const catColors = ['#f0c040','#2B8DE3','#22d87a','#FF9900','#a855f7','#E84C88'];
   _charts['chartCategory'] = new Chart(document.getElementById('chartCategory'), {
     type: 'doughnut',
     data: {
@@ -1371,7 +1404,7 @@ function renderAnalytics() {
     }
   });
 
-  // ─── CHART 2: Monthly Booking Trend (Line) ────────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CHART 2: Monthly Booking Trend (Line) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   _destroyChart('chartMonthly');
   const monthlyOrdered = MONTHS_ORDER.filter(m => byMonthLabel[m]);
   _charts['chartMonthly'] = new Chart(document.getElementById('chartMonthly'), {
@@ -1381,12 +1414,12 @@ function renderAnalytics() {
       datasets: [{
         label: 'Bookings',
         data: monthlyOrdered.map(m => byMonthLabel[m] || 0),
-        borderColor: '#2DC492',
-        backgroundColor: 'rgba(45,196,146,0.12)',
+        borderColor: '#22d87a',
+        backgroundColor: 'rgba(34,216,122,0.12)',
         borderWidth: 2.5,
         pointRadius: 4,
         pointHoverRadius: 6,
-        pointBackgroundColor: '#2DC492',
+        pointBackgroundColor: '#22d87a',
         fill: true,
         tension: 0.4
       }]
@@ -1401,18 +1434,18 @@ function renderAnalytics() {
     }
   });
 
-  // ─── CHART 3: Venue Occupancy % (Horizontal Bar) ─────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CHART 3: Venue Occupancy % (Horizontal Bar) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   _destroyChart('chartOccupancy');
   const audNames = Object.keys(byAud);
   const occVals  = audNames.map(k => Math.round((byAud[k].b / Math.max(byAud[k].c, 1)) * 100));
   _charts['chartOccupancy'] = new Chart(document.getElementById('chartOccupancy'), {
     type: 'bar',
     data: {
-      labels: audNames.map(n => n.length > 16 ? n.slice(0,14)+'…' : n),
+      labels: audNames.map(n => n.length > 16 ? n.slice(0,14)+'Ã¢â‚¬Â¦' : n),
       datasets: [{
         label: 'Occupancy %',
         data: occVals,
-        backgroundColor: occVals.map(v => v >= 80 ? '#F84464' : v >= 50 ? '#FF9900' : '#2B8DE3'),
+        backgroundColor: occVals.map(v => v >= 80 ? '#f0c040' : v >= 50 ? '#FF9900' : '#2B8DE3'),
         borderRadius: 6, borderSkipped: false
       }]
     },
@@ -1427,18 +1460,18 @@ function renderAnalytics() {
     }
   });
 
-  // ─── CHART 4: Revenue by Event Top 5 (Bar) ───────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CHART 4: Revenue by Event Top 5 (Bar) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   _destroyChart('chartRevenue');
   const topRevEntries = Object.entries(revMap).filter(([,v]) => v > 0).sort((a,b) => b[1]-a[1]).slice(0,5);
   _charts['chartRevenue'] = new Chart(document.getElementById('chartRevenue'), {
     type: 'bar',
     data: {
-      labels: topRevEntries.map(([k]) => k.length > 14 ? k.slice(0,12)+'…' : k),
+      labels: topRevEntries.map(([k]) => k.length > 14 ? k.slice(0,12)+'Ã¢â‚¬Â¦' : k),
       datasets: [{
-        label: 'Revenue (₹)',
+        label: 'Revenue (Ã¢â€šÂ¹)',
         data: topRevEntries.map(([,v]) => v),
-        backgroundColor: 'rgba(248,68,100,0.7)',
-        borderColor: '#F84464',
+        backgroundColor: 'rgba(240,192,64,0.7)',
+        borderColor: '#f0c040',
         borderWidth: 1.5,
         borderRadius: 6, borderSkipped: false
       }]
@@ -1447,13 +1480,13 @@ function renderAnalytics() {
       responsive: true, maintainAspectRatio: false,
       scales: {
         x: { grid: { display: false }, ticks: { font: { size: 11 } } },
-        y: { grid: { color: gridColor }, beginAtZero: true, ticks: { callback: v => '₹' + v.toLocaleString('en-IN'), font: { size: 10 } } }
+        y: { grid: { color: gridColor }, beginAtZero: true, ticks: { callback: v => 'Ã¢â€šÂ¹' + v.toLocaleString('en-IN'), font: { size: 10 } } }
       },
       plugins: { legend: { display: false } }
     }
   });
 
-  // ─── CHART 5: Bookings by Day of Week (Polar Area) ────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ CHART 5: Bookings by Day of Week (Polar Area) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   _destroyChart('chartDayOfWeek');
   _charts['chartDayOfWeek'] = new Chart(document.getElementById('chartDayOfWeek'), {
     type: 'polarArea',
@@ -1461,7 +1494,7 @@ function renderAnalytics() {
       labels: DAYS,
       datasets: [{
         data: DAYS.map(d => byDow[d]),
-        backgroundColor: ['rgba(248,68,100,0.7)','rgba(43,141,227,0.7)','rgba(45,196,146,0.7)','rgba(255,153,0,0.7)','rgba(168,85,247,0.7)','rgba(232,76,136,0.7)','rgba(100,116,139,0.7)'],
+        backgroundColor: ['rgba(240,192,64,0.7)','rgba(43,141,227,0.7)','rgba(34,216,122,0.7)','rgba(255,153,0,0.7)','rgba(168,85,247,0.7)','rgba(232,76,136,0.7)','rgba(100,116,139,0.7)'],
         borderWidth: 0
       }]
     },
@@ -1472,7 +1505,7 @@ function renderAnalytics() {
     }
   });
 
-  // ─── Top Events Table ─────────────────────────────────────────────────────
+  // Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Top Events Table Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
   const topEvts = evts
     .map(e => ({ t: e.title, d: e.date, b: (allSeats[e.id]||[]).filter(Boolean).length, rev: (allSeats[e.id]||[]).filter(Boolean).length * (e.price||0) }))
     .sort((a,b) => b.b - a.b).slice(0, 8);
@@ -1486,13 +1519,13 @@ function renderAnalytics() {
       <th style="padding:8px 6px">Revenue</th>
     </tr></thead><tbody>`;
   topEvts.forEach((t, i) => {
-    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1) + '.';
+    const medal = i === 0 ? 'Ã°Å¸Â¥â€¡' : i === 1 ? 'Ã°Å¸Â¥Ë†' : i === 2 ? 'Ã°Å¸Â¥â€°' : (i+1) + '.';
     tbl += `<tr style="border-bottom:1px solid rgba(255,255,255,0.04)">
       <td style="padding:8px 6px;color:var(--text-muted)">${medal}</td>
       <td style="padding:8px 6px;font-weight:600;color:var(--text-primary)">${escH(t.t)}</td>
       <td style="padding:8px 6px;color:var(--text-muted)">${formatDate(t.d)}</td>
       <td style="padding:8px 6px;color:var(--green);font-weight:700">${t.b}</td>
-      <td style="padding:8px 6px;color:var(--accent)">₹${t.rev.toLocaleString('en-IN')}</td>
+      <td style="padding:8px 6px;color:var(--accent)">Ã¢â€šÂ¹${t.rev.toLocaleString('en-IN')}</td>
     </tr>`;
   });
   tbl += '</tbody></table>';
@@ -1524,13 +1557,13 @@ function onSeatAllocInput() {
   fill.style.width = pct + '%';
   if (total === cap) {
     fill.style.background = 'var(--green)'; msg.style.color = 'var(--green)';
-    msg.textContent = '✓ Allocation matches capacity';
+    msg.textContent = 'Ã¢Å“â€œ Allocation matches capacity';
   } else if (total > cap) {
     fill.style.background = '#ef4444'; msg.style.color = '#ef4444';
-    msg.textContent = `⚠ Over by ${total - cap} seat${total - cap !== 1 ? 's' : ''}`;
+    msg.textContent = `Ã¢Å¡Â  Over by ${total - cap} seat${total - cap !== 1 ? 's' : ''}`;
   } else {
     fill.style.background = '#f59e0b'; msg.style.color = '#f59e0b';
-    msg.textContent = `⚠ ${cap - total} seat${cap - total !== 1 ? 's' : ''} unallocated`;
+    msg.textContent = `Ã¢Å¡Â  ${cap - total} seat${cap - total !== 1 ? 's' : ''} unallocated`;
   }
 }
 
@@ -1545,7 +1578,7 @@ async function addAuditorium() {
   const boy      = parseInt(document.getElementById('aBoySeats').value)     || 0;
 
   if (!college || !name || !city) { toast('Fill all auditorium fields','error'); return; }
-  if (isNaN(cap) || cap < 50 || cap > 1000) { toast('Capacity must be 50–1000','error'); return; }
+  if (isNaN(cap) || cap < 50 || cap > 1000) { toast('Capacity must be 50Ã¢â‚¬â€œ1000','error'); return; }
   if (teacher + girl + boy !== cap) { toast(`Seat allocation must equal capacity`, 'error'); return; }
 
   try {
@@ -1573,18 +1606,18 @@ function renderAudListAdmin() {
     const audEvents = evts.filter(e => e.auditoriumId === a.id);
     let booked = 0;
     audEvents.forEach(e => { booked += (allSeats[e.id]||[]).filter(Boolean).length; });
-    const t = a.teacherSeats ?? '—';
-    const g = a.girlSeats    ?? '—';
-    const b = a.boySeats     ?? '—';
+    const t = a.teacherSeats ?? 'Ã¢â‚¬â€';
+    const g = a.girlSeats    ?? 'Ã¢â‚¬â€';
+    const b = a.boySeats     ?? 'Ã¢â‚¬â€';
     return `<div class="admin-list-item">
-      <div class="admin-list-item-title">🎪 ${escH(a.name)}</div>
-      <div class="admin-list-item-meta">🏛 ${escH(a.college)} · 📍 ${escH(a.city)} · 💺 ${a.capacity} seats · ${booked} booked</div>
+      <div class="admin-list-item-title">Ã°Å¸Å½Âª ${escH(a.name)}</div>
+      <div class="admin-list-item-meta">Ã°Å¸Ââ€º ${escH(a.college)} Ã‚Â· Ã°Å¸â€œÂ ${escH(a.city)} Ã‚Â· Ã°Å¸â€™Âº ${a.capacity} seats Ã‚Â· ${booked} booked</div>
       <div class="admin-list-item-meta" style="display:flex;gap:12px;margin-top:4px">
         <span title="Teacher seats"> ${t}</span>
         <span title="Girls seats"> ${g}</span>
         <span title="Boys seats"> ${b}</span>
       </div>
-      ${a.facilities?.length ? `<div class="admin-list-item-meta">🔧 ${a.facilities.join(', ')}</div>` : ''}
+      ${a.facilities?.length ? `<div class="admin-list-item-meta">Ã°Å¸â€Â§ ${a.facilities.join(', ')}</div>` : ''}
       ${state.isSuper ? `<div class="admin-list-actions">
         <button class="admin-del-btn" onclick="deleteAuditorium('${a.id}')">Delete</button>
       </div>` : ''}
@@ -1608,7 +1641,7 @@ function populateAuditoriumSelect() {
   const sel = document.getElementById('evtAuditorium');
   if (!sel) return; // guard: element may not exist yet
   sel.innerHTML = '<option value="">Select Auditorium</option>' +
-    auds.map(a => `<option value="${a.id}">${escH(a.name)} — ${escH(a.college)}</option>`).join('');
+    auds.map(a => `<option value="${a.id}">${escH(a.name)} Ã¢â‚¬â€ ${escH(a.college)}</option>`).join('');
 }
 
 async function adminSubmitEvent() {
@@ -1630,7 +1663,7 @@ async function adminSubmitEvent() {
   try {
     await api.createEvent({ title, category:cat, auditoriumId:audId, date, time, duration:dur, price, color, description:desc, createdBy:state.currentUser });
     await loadCache();
-    toast('🎉 Event published successfully!','success');
+    toast('Ã°Å¸Å½â€° Event published successfully!','success');
     document.getElementById('evtTitle').value='';
     document.getElementById('evtDate').value='';
     document.getElementById('evtTime').value='';
@@ -1665,10 +1698,10 @@ function renderEventsAdmin() {
     const isPast = new Date(ev.date) < today;
     return `<div class="admin-list-item" style="border-left:3px solid ${ev.color||'#5b8dee'};${isPast ? 'opacity:0.6;' : ''}">
       <div class="admin-list-item-title">${escH(ev.title)} ${isPast ? '<span style="font-size:0.7rem;color:#f59e0b;margin-left:6px">[PAST]</span>' : ''}</div>
-      <div class="admin-list-item-meta">🏛 ${escH(ev.college)} · 🎪 ${escH(aud?.name||'Unknown')} · 📅 ${formatDate(ev.date)} ${ev.time} · ⏱${ev.duration}h · ${ev.price>0?`₹${ev.price}`:'Free'}</div>
+      <div class="admin-list-item-meta">Ã°Å¸Ââ€º ${escH(ev.college)} Ã‚Â· Ã°Å¸Å½Âª ${escH(aud?.name||'Unknown')} Ã‚Â· Ã°Å¸â€œâ€¦ ${formatDate(ev.date)} ${ev.time} Ã‚Â· Ã¢ÂÂ±${ev.duration}h Ã‚Â· ${ev.price>0?`Ã¢â€šÂ¹${ev.price}`:'Free'}</div>
       <div class="admin-list-item-meta">
-        ${CATEGORIES[ev.category]||ev.category} &nbsp;·&nbsp;
-        💺 ${bookedCount}/${capacity} booked
+        ${CATEGORIES[ev.category]||ev.category} &nbsp;Ã‚Â·&nbsp;
+        Ã°Å¸â€™Âº ${bookedCount}/${capacity} booked
       </div>
       ${state.isSuper ? `<div class="admin-list-actions">
         <button class="admin-del-btn" onclick="adminRemoveEvent('${ev.id}')">Delete</button>
@@ -1703,8 +1736,8 @@ function renderBookingsAdmin(filter='') {
     const icon = b.userRole === 'student' ? '' : (isAdm ? '' : '');
     html += `<div class="admin-list-item">
       <div class="admin-list-item-title">${icon} ${escH(b.userEmail)}</div>
-      <div class="admin-list-item-meta">🎭 ${escH(b.eventTitle)} · 🎪 ${escH(aud?.name||'Unknown')} · 💺 Seat #${b.seat} · ${b.price>0?`₹${b.price}`:'Free'}</div>
-      <div class="admin-list-item-meta">🎫 ${b.id} · ${formatDateTime(b.bookedAt)}</div>
+      <div class="admin-list-item-meta">Ã°Å¸Å½Â­ ${escH(b.eventTitle)} Ã‚Â· Ã°Å¸Å½Âª ${escH(aud?.name||'Unknown')} Ã‚Â· Ã°Å¸â€™Âº Seat #${b.seat} Ã‚Â· ${b.price>0?`Ã¢â€šÂ¹${b.price}`:'Free'}</div>
+      <div class="admin-list-item-meta">Ã°Å¸Å½Â« ${b.id} Ã‚Â· ${formatDateTime(b.bookedAt)}</div>
       <div class="admin-list-actions"><button class="admin-del-btn" onclick="adminCancelBooking('${b.id}')">Cancel Booking</button></div>
     </div>`;
   });
@@ -1793,6 +1826,21 @@ function formatDate(dateStr) {
   return d.toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
 }
 
+// Returns a human-readable countdown string from now to a future date+time
+function getCountdown(dateStr, timeStr) {
+  const [h, m] = (timeStr || '00:00').split(':').map(Number);
+  const target = new Date(dateStr);
+  target.setHours(h, m, 0, 0);
+  const diff = target - Date.now();
+  if (diff <= 0) return null; // past
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000)  / 60000);
+  if (days > 0)  return `Starts in ${days}d ${hours}h`;
+  if (hours > 0) return `Starts in ${hours}h ${mins}m`;
+  return `Starts in ${mins}m`;
+}
+
 function formatDateTime(isoStr) {
   return new Date(isoStr).toLocaleString('en-IN', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
 }
@@ -1805,15 +1853,15 @@ function addHours(timeStr, hours) {
 
 // ===== USER MANAGEMENT (Super Admin) =====
 const PERM_LABELS = {
-  createEvents: '📅 Create Events',
-  deleteEvents: '🗑️ Delete Events',
-  viewBookings: '📑 View Bookings',
-  cancelBookings: '❌ Cancel Bookings',
-  addAuditoriums: '🏛 Add Auditoriums',
-  deleteAuditoriums: '🗑️ Delete Auditoriums',
-  scanTickets: '🔍 Scan Tickets',
-  viewAnalytics: '📈 View Analytics',
-  manageUsers: '👥 Manage Users'
+  createEvents: 'Ã°Å¸â€œâ€¦ Create Events',
+  deleteEvents: 'Ã°Å¸â€”â€˜Ã¯Â¸Â Delete Events',
+  viewBookings: 'Ã°Å¸â€œâ€˜ View Bookings',
+  cancelBookings: 'Ã¢ÂÅ’ Cancel Bookings',
+  addAuditoriums: 'Ã°Å¸Ââ€º Add Auditoriums',
+  deleteAuditoriums: 'Ã°Å¸â€”â€˜Ã¯Â¸Â Delete Auditoriums',
+  scanTickets: 'Ã°Å¸â€Â Scan Tickets',
+  viewAnalytics: 'Ã°Å¸â€œË† View Analytics',
+  manageUsers: 'Ã°Å¸â€˜Â¥ Manage Users'
 };
 
 const ROLE_DEFAULT_PERMS = {
@@ -1895,7 +1943,7 @@ window.renderUsersAdmin = function() {
             ${escH(u.email)}
             <span class="user-role-badge role-${u.role}">${ROLE_LABELS_FULL[u.role] || u.role}</span>
           </div>
-          <div class="admin-list-item-meta">${escH(u.college || '')} · Joined ${formatDate(u.createdAt)}</div>
+          <div class="admin-list-item-meta">${escH(u.college || '')} Ã‚Â· Joined ${formatDate(u.createdAt)}</div>
         </div>
         ${!isMasterAdmin ? `<div class="admin-list-actions" style="margin-top:0;">
           <button class="btn-secondary" style="font-size:0.75rem;padding:5px 10px;" onclick="openEditUser('${escH(u.email)}')">Edit</button>
@@ -1924,7 +1972,7 @@ window.adminCreateUser = async function() {
 
   try {
     await api.createUser({ email, password, role, college, permissions });
-    toast(`✅ Account created: ${email}`, 'success');
+    toast(`Ã¢Å“â€¦ Account created: ${email}`, 'success');
     document.getElementById('newUserEmail').value = '';
     document.getElementById('newUserPassword').value = '';
     document.getElementById('newUserCollege').value = '';
@@ -1994,7 +2042,7 @@ window.saveEditUser = async function(email) {
 
   try {
     await api.updateUserRole(email, { role, permissions });
-    toast(`✅ Updated: ${email}`, 'success');
+    toast(`Ã¢Å“â€¦ Updated: ${email}`, 'success');
     await loadAndRenderUsers();
   } catch(e) { toast(e.message || 'Update failed', 'error'); }
 };
@@ -2022,7 +2070,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 3. PWA: Register Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then(reg => {
-      console.log('✅ SW registered');
+      console.log('Ã¢Å“â€¦ SW registered');
     }).catch(e => console.warn('SW failed'));
   }
 
@@ -2063,13 +2111,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     showResetPasswordModal();
   } else if (verified === 'true') {
     window.history.replaceState({}, document.title, '/');
-    toast('✅ Email verified! You can now sign in.', 'success', 5000);
+    toast('Ã¢Å“â€¦ Email verified! You can now sign in.', 'success', 5000);
   } else if (verified === 'expired') {
     window.history.replaceState({}, document.title, '/');
-    toast('⚠️ Verification link expired. Sign in and request a new one.', 'error', 5000);
+    toast('Ã¢Å¡Â Ã¯Â¸Â Verification link expired. Sign in and request a new one.', 'error', 5000);
   }
 
-  // FUTURE-04: Waitlist token in URL — user clicked email link
+  // FUTURE-04: Waitlist token in URL Ã¢â‚¬â€ user clicked email link
   const waitlistToken = params.get('waitlist_token');
   if (waitlistToken) {
     window.history.replaceState({}, document.title, '/');
@@ -2084,20 +2132,20 @@ function showInstallBanner() {
   banner.id = 'pwaInstallBanner';
   banner.style.cssText = `
     position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-    background: #1C2132; border: 1px solid #F84464; border-radius: 14px;
+    background: #1C2132; border: 1px solid #f0c040; border-radius: 14px;
     padding: 14px 20px; display: flex; align-items: center; gap: 14px;
-    box-shadow: 0 8px 32px rgba(248,68,100,0.25); z-index: 9998;
+    box-shadow: 0 8px 32px rgba(240,192,64,0.25); z-index: 9998;
     font-family: 'DM Sans', sans-serif; max-width: 340px; width: 90%;
     animation: toastIn 0.3s ease;
   `;
   banner.innerHTML = `
-    <span style="font-size:1.8rem">⬡</span>
+    <span style="font-size:1.8rem">Ã¢Â¬Â¡</span>
     <div style="flex:1">
       <div style="font-weight:700;font-size:0.9rem;color:#fff">Install AuditoriaX</div>
       <div style="font-size:0.78rem;color:#9AA0B8">Add to home screen for quick access</div>
     </div>
-    <button id="pwaInstallBtn" style="background:#F84464;color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;font-size:0.82rem;cursor:pointer;">Install</button>
-    <button id="pwaDismissBtn" style="background:none;border:none;color:#626A85;cursor:pointer;font-size:1.1rem;padding:4px;">✕</button>
+    <button id="pwaInstallBtn" style="background:#f0c040;color:#000000;border:none;border-radius:8px;padding:8px 14px;font-weight:700;font-size:0.82rem;cursor:pointer;">Install</button>
+    <button id="pwaDismissBtn" style="background:none;border:none;color:#626A85;cursor:pointer;font-size:1.1rem;padding:4px;">Ã¢Å“â€¢</button>
   `;
   document.body.appendChild(banner);
 
@@ -2105,7 +2153,7 @@ function showInstallBanner() {
     if (window._deferredInstallPrompt) {
       window._deferredInstallPrompt.prompt();
       const { outcome } = await window._deferredInstallPrompt.userChoice;
-      if (outcome === 'accepted') toast('✅ AuditoriaX added to home screen!', 'success');
+      if (outcome === 'accepted') toast('Ã¢Å“â€¦ AuditoriaX added to home screen!', 'success');
     }
     banner.remove();
   };
@@ -2142,7 +2190,7 @@ socket.on('seat_freed', (data) => {
   renderEventsGrid();
 });
 
-// FUTURE-04: Waitlist — real-time seat-available notification
+// FUTURE-04: Waitlist Ã¢â‚¬â€ real-time seat-available notification
 socket.on('waitlist_seat_available', (data) => {
   const user = state.currentUserData;
   if (!user || user.email !== data.userEmail) return;
@@ -2155,12 +2203,12 @@ socket.on('waitlist_seat_available', (data) => {
   const overlay = document.createElement('div');
   overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);z-index:9999;display:flex;align-items:center;justify-content:center';
   overlay.innerHTML = `
-    <div style="background:#0E111A;border:1px solid #F84464;border-radius:16px;padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 0 48px rgba(248,68,100,0.3)">
-      <div style="font-size:3rem;margin-bottom:12px">🎟</div>
+    <div style="background:#0E111A;border:1px solid #f0c040;border-radius:16px;padding:32px;max-width:420px;width:90%;text-align:center;box-shadow:0 0 48px rgba(240,192,64,0.3)">
+      <div style="font-size:3rem;margin-bottom:12px">Ã°Å¸Å½Å¸</div>
       <h3 style="font-family:'Syne',sans-serif;font-size:1.3rem;color:#fff;margin-bottom:8px">A Seat Just Opened!</h3>
       <p style="color:#9AA0B8;margin-bottom:20px;font-size:0.9rem">You're next in line for <strong style="color:#fff">${escH(title)}</strong>.<br>Claim it before it's gone!</p>
-      <div style="background:rgba(248,68,100,0.1);border:1px solid rgba(248,68,100,0.3);border-radius:8px;padding:10px;margin-bottom:20px;font-size:0.85rem;color:#F84464" id="wl_countdown"></div>
-      <button onclick="claimWaitlistSeat('${data.token}')" style="background:#F84464;color:#fff;border:none;border-radius:8px;padding:14px 28px;font-weight:700;font-size:1rem;cursor:pointer;width:100%;margin-bottom:10px">Claim My Seat →</button>
+      <div style="background:rgba(240,192,64,0.1);border:1px solid rgba(240,192,64,0.3);border-radius:8px;padding:10px;margin-bottom:20px;font-size:0.85rem;color:#f0c040" id="wl_countdown"></div>
+      <button onclick="claimWaitlistSeat('${data.token}')" style="background:#f0c040;color:#000000;border:none;border-radius:8px;padding:14px 28px;font-weight:700;font-size:1rem;cursor:pointer;width:100%;margin-bottom:10px">Claim My Seat Ã¢â€ â€™</button>
       <button onclick="this.closest('[style*=position]').remove()" style="background:none;border:none;color:#626A85;cursor:pointer;font-size:0.85rem">Not interested</button>
     </div>`;
   document.body.appendChild(overlay);
@@ -2172,9 +2220,9 @@ socket.on('waitlist_seat_available', (data) => {
     const cd = document.getElementById('wl_countdown');
     if (!cd) return;
     const m = Math.floor(rem / 60), s = rem % 60;
-    cd.textContent = `⏱ ${m}:${s.toString().padStart(2,'0')} remaining`;
+    cd.textContent = `Ã¢ÂÂ± ${m}:${s.toString().padStart(2,'0')} remaining`;
     if (rem > 0) setTimeout(tick, 1000);
-    else { cd.textContent = '⏱ Expired — seat moved to next person'; cd.style.color = '#626A85'; }
+    else { cd.textContent = 'Ã¢ÂÂ± Expired Ã¢â‚¬â€ seat moved to next person'; cd.style.color = '#626A85'; }
   };
   tick();
 });
@@ -2200,7 +2248,7 @@ socket.on('event_created', async (newEvent) => {
   const explorePane = document.getElementById('explorePane');
   if (explorePane && !explorePane.classList.contains('hidden')) {
     renderEvents();
-    toast('🎭 New event published: ' + newEvent.title, 'success', 4000);
+    toast('Ã°Å¸Å½Â­ New event published: ' + newEvent.title, 'success', 4000);
   }
 });
 
@@ -2236,7 +2284,7 @@ window.addToGoogleCalendar = function() {
   const venue = document.getElementById('tVenue')?.textContent || '';
   const dateTime = document.getElementById('tDateTime')?.textContent || '';
 
-  // Parse "Fri, 16 May 2026 · 10:00" → Google Calendar date format
+  // Parse "Fri, 16 May 2026 Ã‚Â· 10:00" Ã¢â€ â€™ Google Calendar date format
   // Try to extract from booking context if available
   let startIso = '', endIso = '';
   const ev = state.bookingContext?.event;
@@ -2303,6 +2351,96 @@ window.downloadTicketPDF = function() {
 // 4. Admin QR Scanner Logic
 let html5QrcodeScanner = null;
 
+// Ã¢â€â‚¬Ã¢â€â‚¬ Scanner session stats Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+let _scanStats = { granted: 0, denied: 0 };
+
+function _updateScanStats(type) {
+  if (type === 'granted') _scanStats.granted++;
+  else _scanStats.denied++;
+  const gEl = document.getElementById('scanCountGranted');
+  const dEl = document.getElementById('scanCountDenied');
+  if (gEl) gEl.textContent = _scanStats.granted;
+  if (dEl) dEl.textContent = _scanStats.denied;
+}
+
+window.resetScanStats = function() {
+  _scanStats = { granted: 0, denied: 0 };
+  const gEl = document.getElementById('scanCountGranted');
+  const dEl = document.getElementById('scanCountDenied');
+  if (gEl) gEl.textContent = '0';
+  if (dEl) dEl.textContent = '0';
+  toast('Session stats reset', 'info');
+};
+
+// Ã¢â€â‚¬Ã¢â€â‚¬ Scan history Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+let _scanHistory = [];
+
+function _addScanHistory(ticketId, booking, status) {
+  _scanHistory.unshift({ ticketId, booking, status, time: new Date() });
+  if (_scanHistory.length > 10) _scanHistory.pop();
+  _renderScanHistory();
+}
+
+function _renderScanHistory() {
+  const wrap = document.getElementById('scanHistoryWrap');
+  const log  = document.getElementById('scanHistoryLog');
+  if (!wrap || !log) return;
+  if (_scanHistory.length === 0) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  log.innerHTML = _scanHistory.map(entry => {
+    const isOk   = entry.status === 'granted';
+    const timeStr = entry.time.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    return `
+      <div class="scan-history-item ${isOk ? 'granted' : 'denied'}">
+        <span class="sh-icon">${isOk ? 'Ã¢Å“â€¦' : 'Ã¢ÂÅ’'}</span>
+        <div class="sh-info">
+          <span class="sh-ticket">${escH(entry.ticketId)}</span>
+          ${entry.booking ? `<span class="sh-detail">${escH(entry.booking.eventTitle||'')} Ã‚Â· Seat #${entry.booking.seat||''}</span>` : ''}
+          ${!entry.booking && entry.status !== 'granted' ? `<span class="sh-detail" style="color:var(--red)">${escH(entry.ticketId)}</span>` : ''}
+        </div>
+        <span class="sh-time">${timeStr}</span>
+      </div>`;
+  }).join('');
+}
+
+window.clearScanHistory = function() {
+  _scanHistory = [];
+  _renderScanHistory();
+};
+
+// Ã¢â€â‚¬Ã¢â€â‚¬ Audio feedback Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+function _playScanAudio(type) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const gain = ctx.createGain();
+    gain.connect(ctx.destination);
+    if (type === 'success') {
+      // Two rising tones Ã¢â‚¬â€ cheerful
+      [880, 1320].forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        osc.connect(gain);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime + i * 0.12);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.2);
+        osc.start(ctx.currentTime + i * 0.12);
+        osc.stop(ctx.currentTime + i * 0.12 + 0.22);
+      });
+    } else {
+      // Low descending buzz Ã¢â‚¬â€ denial
+      const osc = ctx.createOscillator();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.45);
+      osc.connect(gain);
+      gain.gain.setValueAtTime(0.3, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.52);
+    }
+  } catch (e) { /* audio blocked Ã¢â‚¬â€ fail silently */ }
+}
+
 async function onScanSuccess(decodedText, decodedResult) {
   // Pause scanning temporarily
   if (html5QrcodeScanner) {
@@ -2328,7 +2466,7 @@ window.handleQRImageUpload = async function(event) {
   const statusEl = document.getElementById('uploadScanStatus');
   const label = document.getElementById('qrUploadLabel');
 
-  statusEl.textContent = '⏳ Reading QR code...';
+  statusEl.textContent = 'Ã¢ÂÂ³ Reading QR code...';
   statusEl.style.color = 'var(--text-muted)';
   if (label) label.style.opacity = '0.6';
 
@@ -2345,12 +2483,12 @@ window.handleQRImageUpload = async function(event) {
     const html5QrCode = new Html5Qrcode('uploadQrTempEl');
     const result = await html5QrCode.scanFile(file, /* showImage= */ false);
 
-    statusEl.textContent = '✅ QR read! Verifying...';
+    statusEl.textContent = 'Ã¢Å“â€¦ QR read! Verifying...';
     statusEl.style.color = 'var(--green)';
     await processTicketScan(result);
     statusEl.textContent = '';
   } catch (err) {
-    statusEl.textContent = '❌ Could not read QR from this image. Try a clearer, well-lit screenshot.';
+    statusEl.textContent = 'Ã¢ÂÅ’ Could not read QR from this image. Try a clearer, well-lit screenshot.';
     statusEl.style.color = '#ef4444';
   } finally {
     if (label) label.style.opacity = '1';
@@ -2360,48 +2498,161 @@ window.handleQRImageUpload = async function(event) {
 
 
 async function processTicketScan(ticketId) {
-  const resDiv = document.getElementById('scanResult');
-  resDiv.style.display = 'block';
-  resDiv.className = '';
-  resDiv.innerHTML = '<span class="spinner"></span> Verifying ticket...';
-  
+  // Show a full-screen overlay immediately Ã¢â‚¬â€ no scrolling required
+  showScanResultOverlay('loading', null, null);
+
   try {
     const data = await api.scanTicket(ticketId);
-    
-    resDiv.style.background = 'rgba(45, 196, 146, 0.15)';
-    resDiv.style.border = '1px solid var(--green)';
-    resDiv.innerHTML = `
-      <h4 style="color: var(--green); margin-bottom: 8px;">✅ Entry Granted</h4>
-      <p><strong>Ticket ID:</strong> ${data.booking.ticketId}</p>
-      <p><strong>Event:</strong> ${data.booking.eventTitle}</p>
-      <p><strong>Seat:</strong> #${data.booking.seat}</p>
-    `;
+    _playScanAudio('success');
+    _updateScanStats('granted');
+    _addScanHistory(ticketId, data.booking, 'granted');
+    showScanResultOverlay('success', data.booking, null);
   } catch (err) {
-    if (err.message && !err.message.includes('Network')) {
-      resDiv.style.background = 'rgba(248, 68, 100, 0.15)';
-      resDiv.style.border = '1px solid var(--accent)';
-      resDiv.innerHTML = `
-        <h4 style="color: var(--accent); margin-bottom: 8px;">❌ Access Denied</h4>
-        <p>${escH(err.message)}</p>
-      `;
-    } else {
-      resDiv.innerHTML = '<span style="color:var(--accent)">Network error during verification.</span>';
-    }
+    const isNetwork = !err.message || err.message.includes('Network');
+    _playScanAudio('error');
+    _updateScanStats('denied');
+    _addScanHistory(ticketId, null, 'denied');
+    showScanResultOverlay(isNetwork ? 'network' : 'denied', null, err.message);
   }
-  
-  // Resume scanner after 4 seconds
+
+  // Also keep the legacy #scanResult div hidden (it's below the fold)
+  const resDiv = document.getElementById('scanResult');
+  if (resDiv) resDiv.style.display = 'none';
+
+  // Resume scanner after overlay auto-dismisses (4s)
   setTimeout(() => {
-    if (html5QrcodeScanner) {
-      html5QrcodeScanner.resume();
-    }
-    resDiv.style.display = 'none';
-    document.getElementById('manualScanId').value = '';
-  }, 4000);
+    if (html5QrcodeScanner) html5QrcodeScanner.resume();
+    const el = document.getElementById('manualScanId');
+    if (el) el.value = '';
+  }, 4200);
 }
 
-// Duplicate getCookie() removed — already defined at line 146
+function showScanResultOverlay(status, booking, errorMsg) {
+  // Remove any existing overlay
+  const existing = document.getElementById('scanResultOverlay');
+  if (existing) existing.remove();
 
-// ─── Session Expired Handler ─────────────────────────────────────────────────
+  let bgColor, borderColor, icon, titleHtml, bodyHtml;
+
+  if (status === 'loading') {
+    bgColor = 'rgba(14,17,26,0.97)';
+    borderColor = '#3a4060';
+    icon = '';
+    titleHtml = '<span class="spinner" style="width:32px;height:32px;border-width:3px;margin-bottom:8px;display:inline-block;"></span>';
+    bodyHtml = '<p style="color:#9AA0B8;font-size:1rem;margin:0">Verifying ticket...</p>';
+  } else if (status === 'success') {
+    bgColor = 'rgba(14,17,26,0.97)';
+    borderColor = '#22d87a';
+    icon = 'Ã¢Å“â€¦';
+    titleHtml = `<div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#22d87a;margin-bottom:6px;">Entry Granted</div>`;
+    const rows = [
+      { label: 'Ticket ID',   value: escH(booking.ticketId || booking.id || 'Ã¢â‚¬â€'), mono: true },
+      { label: 'Attendee',    value: escH(booking.userEmail || 'Ã¢â‚¬â€'),               mono: false },
+      { label: 'Event',       value: escH(booking.eventTitle || 'Ã¢â‚¬â€'),              mono: false },
+      { label: 'Venue',       value: escH(booking.auditoriumName || 'Ã¢â‚¬â€'),          mono: false },
+      { label: 'Seat',        value: `#${booking.seat || 'Ã¢â‚¬â€'}`,                    mono: false, big: true },
+    ];
+    bodyHtml = `
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;text-align:left;width:100%;max-width:360px;">
+        ${rows.map(r => `
+          <div style="background:rgba(34,216,122,0.08);border:1px solid rgba(34,216,122,0.2);border-radius:10px;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+            <span style="font-size:0.68rem;color:#9AA0B8;text-transform:uppercase;letter-spacing:0.08em;flex-shrink:0;">${r.label}</span>
+            <span style="${r.big ? 'font-size:1.1rem;font-weight:800;color:#22d87a;' : 'font-size:0.88rem;font-weight:600;color:#fff;'}${r.mono ? 'font-family:monospace;' : ''}text-align:right;word-break:break-all;">${r.value}</span>
+          </div>`).join('')}
+      </div>`;
+  } else if (status === 'denied') {
+    bgColor = 'rgba(14,17,26,0.97)';
+    borderColor = '#f84464';
+    icon = 'Ã¢ Å’';
+    titleHtml = `<div style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:#f84464;margin-bottom:6px;">Access Denied</div>`;
+    bodyHtml = `<p style="color:#ccc;font-size:0.95rem;margin:10px 0 0;max-width:300px;text-align:center;">${escH(errorMsg || 'Ticket invalid or already used.')}</p>`;
+  } else {
+    bgColor = 'rgba(14,17,26,0.97)';
+    borderColor = '#f84464';
+    icon = 'Ã¢Å¡Â Ã¯Â¸ ';
+    titleHtml = `<div style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#f0c040;margin-bottom:6px;">Network Error</div>`;
+    bodyHtml = `<p style="color:#9AA0B8;font-size:0.9rem;margin:8px 0 0;">Could not reach server. Check your connection.</p>`;
+  }
+
+  const autoCloseMs = status === 'loading' ? 0 : 4000;
+
+  const overlay = document.createElement('div');
+  overlay.id = 'scanResultOverlay';
+  overlay.style.cssText = `
+    position: fixed; inset: 0; z-index: 99999;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+    animation: scanOverlayIn 0.25s cubic-bezier(0.34,1.56,0.64,1) both;
+  `;
+
+  overlay.innerHTML = `
+    <style>
+      @keyframes scanOverlayIn {
+        from { opacity:0; transform:scale(0.88); }
+        to   { opacity:1; transform:scale(1); }
+      }
+      @keyframes scanOverlayOut {
+        from { opacity:1; transform:scale(1); }
+        to   { opacity:0; transform:scale(0.92); }
+      }
+      #scanResultCard { animation: scanOverlayIn 0.28s cubic-bezier(0.34,1.56,0.64,1) both; }
+      #scanResultCard.closing { animation: scanOverlayOut 0.2s ease forwards; }
+    </style>
+    <div id="scanResultCard" style="
+      background: ${bgColor};
+      border: 2px solid ${borderColor};
+      border-radius: 20px;
+      padding: 32px 24px 24px;
+      max-width: 440px; width: 92%;
+      text-align: center;
+      box-shadow: 0 0 60px ${borderColor}40, 0 20px 60px rgba(0,0,0,0.6);
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
+    ">
+      ${status !== 'loading' ? `
+        <div style="font-size:3.2rem;line-height:1;margin-bottom:10px;">${icon}</div>
+      ` : ''}
+      ${titleHtml}
+      ${bodyHtml}
+      ${status !== 'loading' ? `
+        <div style="display:flex;gap:10px;margin-top:20px;width:100%;max-width:360px;">
+          <button onclick="document.getElementById('scanResultOverlay').remove(); if(html5QrcodeScanner){try{html5QrcodeScanner.resume();}catch(e){}}"
+            style="flex:1;background:${borderColor};color:${status==='success'?'#000':'#fff'};border:none;border-radius:10px;padding:11px 16px;font-size:0.88rem;font-weight:700;cursor:pointer;">
+            Scan Another Ã¢â€ â€™
+          </button>
+          <button onclick="document.getElementById('scanResultOverlay').remove()"
+            style="flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#9AA0B8;border-radius:10px;padding:11px 16px;font-size:0.88rem;cursor:pointer;">
+            Dismiss
+          </button>
+        </div>
+        ${autoCloseMs > 0 ? `<div style="margin-top:10px;font-size:0.7rem;color:#626A85;">Auto-closing in ${autoCloseMs/1000}s</div>` : ''}
+      ` : ''}
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Click backdrop to dismiss (not during loading)
+  if (status !== 'loading') {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.remove();
+    });
+    if (autoCloseMs > 0) {
+      setTimeout(() => {
+        const card = document.getElementById('scanResultCard');
+        if (card) card.classList.add('closing');
+        setTimeout(() => {
+          const ov = document.getElementById('scanResultOverlay');
+          if (ov) ov.remove();
+        }, 200);
+      }, autoCloseMs);
+    }
+  }
+}
+
+// Duplicate getCookie() removed Ã¢â‚¬â€ already defined at line 146
+
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Session Expired Handler Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 window.addEventListener('auditoriax:session-expired', () => {
   state.currentUser = null;
   state.currentUserData = null;
@@ -2433,7 +2684,7 @@ function showForgotPasswordModal() {
   document.getElementById('forgotPwEmail').value = '';
   document.getElementById('forgotPwMsg').textContent = '';
   const btn = document.getElementById('forgotPwBtn');
-  if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link →'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link Ã¢â€ â€™'; }
   modal.classList.remove('hidden');
 }
 
@@ -2452,13 +2703,13 @@ async function handleForgotPassword() {
   try {
     await api.forgotPassword(email);
     if (msg) {
-      msg.textContent = '✅ If that email exists, a reset link has been sent. Check your inbox.';
+      msg.textContent = 'Ã¢Å“â€¦ If that email exists, a reset link has been sent. Check your inbox.';
       msg.style.color = 'var(--green)';
     }
     if (btn) btn.textContent = 'Sent!';
   } catch(e) {
     if (msg) { msg.textContent = e.message || 'Failed to send reset email.'; msg.style.color = '#ef4444'; }
-    if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link →'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Send Reset Link Ã¢â€ â€™'; }
   }
 }
 
@@ -2470,7 +2721,7 @@ function showResetPasswordModal() {
   document.getElementById('resetPwConfirm').value = '';
   document.getElementById('resetPwMsg').textContent = '';
   const btn = document.getElementById('resetPwBtn');
-  if (btn) { btn.disabled = false; btn.textContent = 'Set New Password →'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'Set New Password Ã¢â€ â€™'; }
   modal.classList.remove('hidden');
 }
 
@@ -2489,7 +2740,7 @@ async function handleResetPassword() {
   try {
     await api.resetPassword(token, newPw);
     if (msg) {
-      msg.textContent = '✅ Password updated! You can now sign in.';
+      msg.textContent = 'Ã¢Å“â€¦ Password updated! You can now sign in.';
       msg.style.color = 'var(--green)';
     }
     if (btn) btn.textContent = 'Done!';
@@ -2504,7 +2755,7 @@ async function handleResetPassword() {
     }, 1500);
   } catch(e) {
     if (msg) { msg.textContent = e.message || 'Reset failed. The link may have expired.'; msg.style.color = '#ef4444'; }
-    if (btn) { btn.disabled = false; btn.textContent = 'Set New Password →'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Set New Password Ã¢â€ â€™'; }
   }
 }
 
@@ -2517,7 +2768,7 @@ function showRegisterInstitution() {
   });
   document.getElementById('registerInstMsg').textContent = '';
   const btn = document.getElementById('registerInstBtn');
-  if (btn) { btn.disabled = false; btn.textContent = 'Register Institution →'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'Register Institution Ã¢â€ â€™'; }
   modal.classList.remove('hidden');
 }
 
@@ -2544,7 +2795,7 @@ async function handleRegisterInstitution() {
   try {
     await api.registerInstitution({ name, slug, domain: domain || null, city, state, contactEmail: contact });
     if (msg) {
-      msg.textContent = `✅ Institution "${name}" registered! You are now an institution admin.`;
+      msg.textContent = `Ã¢Å“â€¦ Institution "${name}" registered! You are now an institution admin.`;
       msg.style.color = 'var(--green)';
     }
     if (btn) btn.textContent = 'Registered!';
@@ -2553,11 +2804,11 @@ async function handleRegisterInstitution() {
       const userData = await api.getMe();
       if (userData) { state.currentUserData = userData; }
     } catch(e) {}
-    toast(`🏛 Institution "${name}" registered successfully!`, 'success', 4000);
+    toast(`Ã°Å¸Ââ€º Institution "${name}" registered successfully!`, 'success', 4000);
     setTimeout(closeRegisterInstitution, 1800);
   } catch(e) {
     if (msg) { msg.textContent = e.message || 'Registration failed.'; msg.style.color = '#ef4444'; }
-    if (btn) { btn.disabled = false; btn.textContent = 'Register Institution →'; }
+    if (btn) { btn.disabled = false; btn.textContent = 'Register Institution Ã¢â€ â€™'; }
   }
 }
 // ===== FUTURE-02: BILLING DASHBOARD =====
@@ -2576,19 +2827,19 @@ async function renderBillingAdmin() {
 
   try {
     if (isSuper) {
-      // ── Super Admin: Platform-wide revenue view ──────────────────────
+      // Ã¢â€â‚¬Ã¢â€â‚¬ Super Admin: Platform-wide revenue view Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
       const [data, plans] = await Promise.all([
         api.getAllRevenue(1, 50),
         api.getPlans()
       ]);
 
       const p = data.platform;
-      const formatINR = n => '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const formatINR = n => 'Ã¢â€šÂ¹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
       pane.innerHTML = `
         <div class="billing-dashboard">
           <div class="billing-header">
-            <h3>💰 Platform Revenue</h3>
+            <h3>Ã°Å¸â€™Â° Platform Revenue</h3>
             <p class="billing-subtitle">All fees collected across institutions</p>
           </div>
 
@@ -2617,7 +2868,7 @@ async function renderBillingAdmin() {
 
           <div class="billing-section">
             <div class="billing-section-header">
-              <h4>📋 Recent Transactions</h4>
+              <h4>Ã°Å¸â€œâ€¹ Recent Transactions</h4>
               <span class="billing-total">${data.pagination.total} total</span>
             </div>
             <div class="billing-table-wrap">
@@ -2627,8 +2878,8 @@ async function renderBillingAdmin() {
                 </tr></thead>
                 <tbody>${data.records.map(r => `
                   <tr>
-                    <td>${r.eventTitle || '—'}</td>
-                    <td>#${r.seat || '—'}</td>
+                    <td>${r.eventTitle || 'Ã¢â‚¬â€'}</td>
+                    <td>#${r.seat || 'Ã¢â‚¬â€'}</td>
                     <td><strong>${formatINR(r.totalAmount)}</strong></td>
                     <td>${r.platformFeePercent}%</td>
                     <td class="fee-col">${formatINR(r.platformFee)}</td>
@@ -2637,7 +2888,7 @@ async function renderBillingAdmin() {
                     <td>${new Date(r.createdAt).toLocaleDateString('en-IN')}</td>
                     <td>${r.payoutStatus === 'pending' ?
                       `<button class="btn-xs" onclick="markPayoutPaid('${r.id}')">Mark Paid</button>` :
-                      '<span style="color:var(--text-muted);font-size:0.75rem">✓ Done</span>'}</td>
+                      '<span style="color:var(--text-muted);font-size:0.75rem">Ã¢Å“â€œ Done</span>'}</td>
                   </tr>`).join('')}
                 </tbody>
               </table>
@@ -2645,12 +2896,12 @@ async function renderBillingAdmin() {
           </div>
 
           <div class="billing-section">
-            <h4>🏷 Plan Tiers</h4>
+            <h4>Ã°Å¸ÂÂ· Plan Tiers</h4>
             <div class="plans-grid">
               ${plans.plans.map(pl => `
                 <div class="plan-card ${pl.id}">
                   <div class="plan-name">${pl.name}</div>
-                  <div class="plan-price">${pl.price === 0 ? 'Free' : '₹' + pl.price + '/mo'}</div>
+                  <div class="plan-price">${pl.price === 0 ? 'Free' : 'Ã¢â€šÂ¹' + pl.price + '/mo'}</div>
                   <div class="plan-fee">${pl.platformFeePercent}% platform fee</div>
                   <ul class="plan-features">${pl.features.map(f => `<li>${f}</li>`).join('')}</ul>
                 </div>`).join('')}
@@ -2659,15 +2910,15 @@ async function renderBillingAdmin() {
         </div>`;
 
     } else if (isInstAdmin && user?.institutionSlug) {
-      // ── Institution Admin: Own billing summary ───────────────────────
+      // Ã¢â€â‚¬Ã¢â€â‚¬ Institution Admin: Own billing summary Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
       const data = await api.getInstitutionBilling(user.institutionSlug);
-      const formatINR = n => '₹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const formatINR = n => 'Ã¢â€šÂ¹' + Number(n || 0).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       const b = data.billing || {};
 
       pane.innerHTML = `
         <div class="billing-dashboard">
           <div class="billing-header">
-            <h3>💳 Billing — ${data.institution?.name || 'Your Institution'}</h3>
+            <h3>Ã°Å¸â€™Â³ Billing Ã¢â‚¬â€ ${data.institution?.name || 'Your Institution'}</h3>
             <span class="plan-badge ${data.institution?.plan}">${(data.institution?.plan || 'free').toUpperCase()} PLAN</span>
           </div>
 
@@ -2699,7 +2950,7 @@ async function renderBillingAdmin() {
           </div>
 
           <div class="billing-section">
-            <h4>📅 Monthly Breakdown</h4>
+            <h4>Ã°Å¸â€œâ€¦ Monthly Breakdown</h4>
             <div class="billing-table-wrap">
               <table class="billing-table">
                 <thead><tr><th>Month</th><th>Tickets</th><th>Gross</th><th>Platform Fee</th><th>Your Amount</th></tr></thead>
@@ -2719,7 +2970,7 @@ async function renderBillingAdmin() {
           </div>
 
           <div class="billing-section">
-            <h4>🧾 Recent Transactions</h4>
+            <h4>Ã°Å¸Â§Â¾ Recent Transactions</h4>
             <div class="billing-table-wrap">
               <table class="billing-table">
                 <thead><tr><th>Event</th><th>Seat</th><th>Paid</th><th>Fee</th><th>Your Share</th><th>Status</th><th>Date</th></tr></thead>
@@ -2727,8 +2978,8 @@ async function renderBillingAdmin() {
                   '<tr><td colspan="7" style="text-align:center;color:var(--text-muted)">No paid transactions yet</td></tr>' :
                   data.recent.map(r => `
                   <tr>
-                    <td>${r.eventTitle || '—'}</td>
-                    <td>#${r.seat || '—'}</td>
+                    <td>${r.eventTitle || 'Ã¢â‚¬â€'}</td>
+                    <td>#${r.seat || 'Ã¢â‚¬â€'}</td>
                     <td>${formatINR(r.totalAmount)}</td>
                     <td class="fee-col">${formatINR(r.platformFee)}</td>
                     <td class="inst-col">${formatINR(r.institutionAmount)}</td>
@@ -2741,7 +2992,7 @@ async function renderBillingAdmin() {
           </div>
 
           <div class="billing-section">
-            <h4>📦 Plan Limits</h4>
+            <h4>Ã°Å¸â€œÂ¦ Plan Limits</h4>
             <div class="plan-limits-grid">
               <div class="limit-item">
                 <span class="limit-label">Auditoriums</span>
@@ -2768,7 +3019,7 @@ async function markPayoutPaid(id) {
   if (note === null) return; // cancelled
   try {
     await api.markPayoutPaid(id, note);
-    toast('✅ Payout marked as paid', 'success');
+    toast('Ã¢Å“â€¦ Payout marked as paid', 'success');
     renderBillingAdmin(); // refresh
   } catch(e) {
     toast('Failed: ' + e.message, 'error');
@@ -2797,7 +3048,7 @@ async function joinWaitlist(eventId, eventTitle, clickEvent) {
   }
   try {
     const res = await api.joinWaitlist(eventId);
-    toast(`📋 ${res.message}`, 'success', 5000);
+    toast(`Ã°Å¸â€œâ€¹ ${res.message}`, 'success', 5000);
     // Update local cache so button changes immediately
     if (!cache.myWaitlist) cache.myWaitlist = [];
     cache.myWaitlist.push({ eventId, position: res.position, status: 'waiting' });
@@ -2817,16 +3068,16 @@ async function claimWaitlistSeat(token) {
   try {
     const data = await api.claimWaitlistSeat(token);
     if (!data.valid) {
-      toast('⚠️ This seat claim link is invalid or already used.', 'error');
+      toast('Ã¢Å¡Â Ã¯Â¸Â This seat claim link is invalid or already used.', 'error');
       return;
     }
     // Open the booking modal for the event
     const ev = cache.events.find(e => e.id === data.eventId);
     if (ev) {
-      toast('🎟 Seat reserved for you! Complete your booking below.', 'success', 6000);
+      toast('Ã°Å¸Å½Å¸ Seat reserved for you! Complete your booking below.', 'success', 6000);
       openBookingModal(ev);
     } else {
-      // Event not in cache yet — reload
+      // Event not in cache yet Ã¢â‚¬â€ reload
       await loadCache();
       const ev2 = cache.events.find(e => e.id === data.eventId);
       if (ev2) openBookingModal(ev2);
@@ -2837,7 +3088,7 @@ async function claimWaitlistSeat(token) {
     renderEventsGrid();
   } catch (e) {
     if (e.message?.includes('expired') || e.status === 410) {
-      toast('⏱ Your claim window expired. The seat was given to the next person.', 'error', 6000);
+      toast('Ã¢ÂÂ± Your claim window expired. The seat was given to the next person.', 'error', 6000);
     } else {
       toast(e.message || 'Failed to claim seat', 'error');
     }
@@ -2850,3 +3101,28 @@ loadCache = async function() {
   await _origLoadCache();
   await loadMyWaitlist();
 };
+
+// ===== THEME TOGGLE =====
+function initTheme() {
+  const saved = localStorage.getItem('auditoriax-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = saved === 'light' ? '☀️' : '🌙';
+}
+
+window.toggleTheme = function() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('auditoriax-theme', next);
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) {
+    btn.textContent = next === 'light' ? '☀️' : '🌙';
+    btn.style.transform = 'rotate(180deg)';
+    setTimeout(() => { btn.style.transform = ''; }, 350);
+  }
+};
+
+// Apply theme on startup
+initTheme();
+

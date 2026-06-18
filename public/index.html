@@ -27,7 +27,7 @@
 
   <!-- ===== PWA ===== -->
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#F84464" />
+  <meta name="theme-color" content="#f0c040" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -206,6 +206,7 @@
         </div>
       </div>
       <div class="nav-right">
+        <button id="themeToggleBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
         <div class="nav-user" onclick="toggleUserMenu()">
           <div class="avatar" id="navAvatar"></div>
           <div class="nav-user-info">
@@ -222,6 +223,7 @@
           <a onclick="handleLogout()" class="danger-link">Sign Out</a>
         </div>
       </div>
+
     </nav>
 
     <!-- MAIN TABS -->
@@ -247,7 +249,7 @@
           <div class="hero-card">
             <div class="hero-seats">
               <div class="mini-seat booked"></div><div class="mini-seat booked"></div><div class="mini-seat"></div><div class="mini-seat"></div><div class="mini-seat booked"></div>
-              <div class="mini-seat"></div><div class="mini-seat booked"></div><div class="mini-seat booked"></div><div class="mini-seat"></div><div class="mini-seat booked"></div>
+              <div class="mini-seat"></div><div class="mini-seat booked"></div><div class="mini-seat booked"></div><div class="mini-seat my"></div><div class="mini-seat booked"></div>
               <div class="mini-seat"></div><div class="mini-seat"></div><div class="mini-seat booked"></div><div class="mini-seat"></div><div class="mini-seat"></div>
             </div>
             <div class="hero-ticket-label">LIVE SEAT MAP</div>
@@ -581,6 +583,20 @@
         <h4>📸 Ticket Scanner</h4>
         <p style="color: var(--text-muted); margin-bottom: 16px;">Scan with camera or select a QR screenshot from your gallery.</p>
 
+        <!-- Session Stats Bar -->
+        <div id="scannerStatsBar" class="scanner-stats-bar">
+          <div class="scan-stat granted">
+            <span class="scan-stat-num" id="scanCountGranted">0</span>
+            <span class="scan-stat-label">✅ Granted</span>
+          </div>
+          <div class="scan-stat-divider"></div>
+          <div class="scan-stat denied">
+            <span class="scan-stat-num" id="scanCountDenied">0</span>
+            <span class="scan-stat-label">❌ Denied</span>
+          </div>
+          <button class="scan-stat-reset" onclick="resetScanStats()" title="Reset session counts">↺ Reset</button>
+        </div>
+
         <!-- Camera Scanner -->
         <div id="qr-reader" style="width:100%; max-width: 500px; margin: 0 auto; border-radius: 8px; overflow: hidden; border: 1px solid var(--border);"></div>
 
@@ -608,8 +624,19 @@
         </div>
 
         <div id="scanResult" style="margin-top: 20px; padding: 16px; border-radius: 8px; display: none; text-align: left;"></div>
+
+        <!-- Scan History Log -->
+        <div id="scanHistoryWrap" style="margin-top:24px;text-align:left;display:none;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+            <span style="font-size:0.78rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">Recent Scans</span>
+            <button onclick="clearScanHistory()" style="background:none;border:none;color:var(--text-muted);font-size:0.75rem;cursor:pointer;">Clear</button>
+          </div>
+          <div id="scanHistoryLog" class="scan-history-log"></div>
+        </div>
+
       </div>
     </div>
+
     
   </div><!-- end mainApp -->
 </div><!-- end app -->

@@ -154,7 +154,7 @@ app.use('/api/institutions', institutionRoutes);
 app.use('/api/waitlist',     waitlistRoutes); // FUTURE-04
 
 // ── Static files ──────────────────────────────────────────────────────────────
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
 
 // ── FUTURE-10: Routing ────────────────────────────────────────────────────────
 // GET /           → public landing page

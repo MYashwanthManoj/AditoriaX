@@ -5,6 +5,119 @@
 
 ---
 
+## Session 11 — 11 UX/Feature Improvements
+
+**Date:** June 2026 | **Status:** ✅ Complete | **Files:** `public/app.js`, `public/index.html`, `public/sstyle.css`
+
+### Implemented by priority:
+
+#### 🔴 HIGH — Scanner UX
+| ID | Feature | Detail |
+|----|---------|--------|
+| #1 | **Scan session stats counter** | Live ✅ Granted / ❌ Denied counter above camera. Resets with ↺ button. State in `_scanStats`. |
+| #2 | **Audio feedback** | Web Audio API — two rising tones on success, low sawtooth buzz on denial. Fails silently if audio blocked. `_playScanAudio()`. |
+| #3 | **Scan history log** | Last 10 scans shown below scanner. Each row: icon, ticket ID, event+seat, timestamp. Animated slide-in. `_scanHistory[]`. |
+
+#### 🟠 MEDIUM — UX & Events
+| ID | Feature | Detail |
+|----|---------|--------|
+| #6 | **Event countdown** | Each event card now shows `"Starts in 2d 4h"` or `"Event ended"` badge below the time. `getCountdown(date, time)` helper. |
+| #12 | **"Scan Another →" button** | Overlay now has two buttons: primary colored "Scan Another →" (resumes scanner immediately) + "Dismiss". |
+| #13 | **Attendee email on scan overlay** | Success card now shows: Ticket ID, **Attendee email**, Event, Venue, Seat — in a structured rows layout. |
+
+#### 🟡 LOWER — Theme
+| ID | Feature | Detail |
+|----|---------|--------|
+| #9 | **Dark/Light theme toggle** | 🌙/☀️ button in nav. Writes `data-theme="light"` to `<html>`. Saves to `localStorage`. CSS vars override for light mode. `toggleTheme()` + `initTheme()`. |
+
+#### 🟢 QUICK WINS
+| ID | Feature | Detail |
+|----|---------|--------|
+| #14 | **Skeleton loaders — My Bookings** | Three skeleton ticket cards shown while `loadMyBookings()` awaits. Matches real card structure. |
+| #15 | **Past events badge** | Bookings where `date < today` show `"✓ Attended"` badge (grey), desaturated accent colours, no Cancel button, countdown hidden. |
+| #11 | **Countdown on My Bookings** | Upcoming bookings show an amber `🕐 Starts in Xd Xh` pill above the ticket footer. |
+
+#### Files updated:
+- `public/index.html` — stats bar HTML, scan history HTML, theme toggle button in nav
+- `public/app.js` — all new functions + updated processTicketScan, bookingTicketHTML, renderMyBookings, eventCardHTML, showScanResultOverlay
+- `public/sstyle.css` — 168 lines of new styles for all features + light theme
+
+---
+
+## Session 10 — QR Scanner UX: Instant Result Overlay
+
+
+**Date:** June 2026 | **Status:** ✅ Complete
+
+### UX-01 · `public/app.js` — Scan result shown in-place via full-screen overlay (no scroll required)
+
+**Problem:** After scanning or manually entering a ticket ID, the result was injected into a `#scanResult` `<div>` that lives at the **bottom** of the scanner pane — below the camera viewfinder, the "OR" divider, the gallery upload button, and the manual entry field. Users had to scroll down to see whether the ticket was valid or denied.
+
+**Fix:** Replaced the `processTicketScan()` logic with a two-function approach:
+
+1. **`processTicketScan(ticketId)`** — immediately calls `showScanResultOverlay('loading', ...)`, awaits the API, then calls `showScanResultOverlay('success'|'denied'|'network', ...)`. The legacy `#scanResult` div is kept in HTML but is always hidden.
+
+2. **`showScanResultOverlay(status, booking, errorMsg)`** — creates a `position:fixed` full-screen overlay with a blurred backdrop and a centered card. Four states:
+   - **`loading`** — dark bordered card with spinner + "Verifying ticket..." text (no dismiss button — auto-replaced by success/denied)
+   - **`success`** — green-bordered card with ✅ icon, "Entry Granted" heading, and three detail rows (Ticket ID · Event · Seat #)
+   - **`denied`** — red-bordered card with ❌ icon, "Access Denied" heading, and the exact API error message
+   - **`network`** — amber-bordered card with ⚠️ icon for connection failures
+
+**Behaviour details:**
+- Spring-bounce entrance animation (`cubic-bezier(0.34,1.56,0.64,1)`) on open; fade-scale-out on close
+- Auto-dismisses after **4 seconds** with a "Auto-closing in 4s" hint label
+- "Dismiss" button for immediate manual close; clicking the backdrop also closes it
+- Scanner camera resumes automatically after the overlay clears (4.2s timeout)
+- Manual scan input field is cleared on resume
+
+**Why:** Scanners at event gates need **instant visual confirmation** — looking down at the bottom of a scrolled page for a green/red signal is unusable in a real check-in scenario.
+
+---
+
+## Session 9 — FUTURE-10: Public Landing Page + Production Deployment
+
+**Date:** June 2026 | **Status:** ✅ Complete
+
+### FUTURE-10A: Premium Landing Page — `public/landing.html`
+- **Replaced** the old placeholder landing page with a fully redesigned, production-grade marketing page.
+- **Sections built:**
+  - **Navbar** — Glassmorphic blur-on-scroll nav with Sign In / Get Started CTAs
+  - **Hero** — Animated gradient headline, floating orb glows, live ticket mockup card, mini seat-map card, notification card, avatar stack social proof
+  - **Marquee** — Infinite-scroll tech feature strip
+  - **Stats strip** — Animated count-up on scroll (50+ colleges, 2400+ events, 98K+ seats, 99.9% uptime)
+  - **Features grid** — 6-card grid (Real-time seats, QR scanning, Razorpay, Multi-tenant, Analytics, Waitlist) with hover lift animation
+  - **How it works** — 3-step connected timeline
+  - **Pricing** — Free / Basic / Premium cards with real fee rates from env
+  - **Testimonials** — 3 review cards with star ratings
+  - **Final CTA** — Gradient glow card
+  - **Footer** — 4-column with live "All systems operational" indicator
+- **Visual effects:** Floating canvas particles, scroll-reveal fade-slide animations, glassmorphism cards.
+- **Why:** The old landing page was a plain placeholder. Any new visitor needed a professional first impression.
+
+### FUTURE-10B: Production Deployment — Render.com + MongoDB Atlas
+- **`render.yaml`** — Already committed from a prior session. Contains all non-secret env defaults and auto-deploy config pointing to Singapore region.
+- **MongoDB Atlas M0 (Free)** cluster created: `auditoriax` on AWS Hyderabad (ap-south-2).
+  - Database user: `yashwanthmanoj623_db_user`
+  - Network access: `0.0.0.0/0` (required for Render's dynamic IPs)
+- **Render.com Web Service** deployed from `MYashwanthManoj/AditoriaX` → `main` branch.
+  - Live URL: **https://auditoriax.onrender.com**
+  - All 20+ secret environment variables added via Render Environment dashboard.
+  - Auto-deploy enabled — every `git push origin main` redeploys automatically.
+- **GitHub repo:** https://github.com/MYashwanthManoj/AditoriaX
+  - Initial push included merge of remote history (`test.txt.txt` from prior repo init).
+
+### `seed-college-events.js` — New production seed script *(new file)*
+- **What:** Seeds 10 realistic college events (Hackathon, Music Night, Research Presentation, Entrepreneurship Summit, Drama Fest, Cybersecurity Workshop, Sports Conclave, AI Symposium, Literary Festival, Career Fair) with future dates, multiple colleges, price tiers (free/₹30/₹50/₹149/₹199/₹299).
+- Requires at least one auditorium to exist in DB (uses round-robin assignment).
+- Creates matching `SeatMap` per event.
+- **Why:** Fresh production deployments have empty databases. This enables quick demo data without manual UI entry.
+
+### Git commit: `128156f`
+- Files changed: `CHANGELOG.md`, `middleware/tenant.js`, `public/landing.html`, `seed-college-events.js`, `utils/logger.js`
+- 1,335 insertions, 399 deletions
+
+---
+
 ## Session 8 — FUTURE-06 Audit + FUTURE-07: Structured Logging Completion
 
 **Date:** June 2026 | **Status:** ✅ Complete
@@ -179,7 +292,7 @@
 | FUTURE-06 | 🟠 | Email verification on signup | ✅ Done (Session 4) |
 | FUTURE-07 | 🟡 | Structured logging (replace console.log with winston) | ✅ Done (Session 8) |
 | FUTURE-08 | 🟡 | Frontend code split (split monolithic app.js) | Pending |
-| FUTURE-10 | 🟡 | Public landing page + deployment (Render/Railway) | Pending |
+| FUTURE-10 | 🟡 | Public landing page + deployment (Render/Railway) | ✅ Done (Session 9) |
 | FUTURE-11 | 🟢 | Analytics dashboard with real charts (Chart.js) | ✅ Done (Session 7) |
 | FUTURE-12 | 🟢 | Mobile push notifications (Web Push API via existing PWA) | Pending |
 
@@ -247,14 +360,14 @@
 | `models/PlatformRevenue.js` | **[NEW] FUTURE-02:** Audit trail for every platform fee collected | Session 6 |
 | `utils/mailer.js` | Email templates: booking confirmation, email verification, password reset | Session 4 |
 | `public/api.js` | Frontend fetch abstraction — added institution + **FUTURE-02** billing API methods | Session 6 |
-| `public/app.js` | All frontend UI logic (~2,600 lines) + billing dashboard + payout views | Session 6 |
+| `public/app.js` | All frontend UI logic (~2,950 lines) + billing dashboard + payout views + **UX-01** QR scan overlay | Session 10 |
 | `public/index.html` | Added 💳 Billing tab in admin panel + `billingAdminPane` | Session 6 |
 | `public/sstyle.css` | **FUTURE-02:** Billing dashboard styles — stat cards, tables, plan tiers, badges | Session 6 |
 | `tests/run_tests.js` | Automated integration test suite (no external deps) | Session 1 |
 | `.env` | Environment variables — never commit | Session 4 |
 | `.env.example` | Added `PLATFORM_FEE_*`, `PLAN_*_MAX_*` billing env vars | Session 6 |
 | `.gitignore` | Prevents secrets and node_modules from being committed | Session 2 |
-| `CHANGELOG.md` | This file | Session 6 |
+| `CHANGELOG.md` | This file | Session 10 |
 
 ---
 
